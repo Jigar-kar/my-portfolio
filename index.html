@@ -78,10 +78,48 @@
       font-size: 1.1rem;
       text-decoration: none;
       transition: background 0.3s ease;
+      border: none;
+      cursor: pointer;
     }
 
     .download-btn:hover {
       background: #0056b3;
+    }
+
+    .progress-container {
+      display: none;
+      margin-top: 20px;
+      width: 100%;
+      max-width: 600px;
+    }
+
+    .progress-bar-bg {
+      background: #e0e0e0;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .progress-bar-fill {
+      height: 30px;
+      width: 0%;
+      background-color: #28a745;
+      text-align: center;
+      line-height: 30px;
+      color: white;
+      font-weight: bold;
+      transition: width 0.3s;
+    }
+
+    .hero-imgs {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .hero-imgs img {
+      width: 250px;
+      border-radius: 12px;
     }
 
     .features {
@@ -118,18 +156,6 @@
     .feature h3 {
       margin-top: 1rem;
       font-size: 1.2rem;
-    }
-
-    .hero-imgs {
-      display: flex;
-      justify-content: center;
-      gap: 2rem;
-      margin-top: 2rem;
-    }
-
-    .hero-imgs img {
-      width: 250px;
-      border-radius: 12px;
     }
 
     .counters {
@@ -205,8 +231,15 @@
   <section class="container" id="home">
     <h1>Empowering Developers with Delight</h1>
     <p>A powerful mobile toolkit designed to simplify your dev workflow, boost productivity, and help you build better software — faster.</p>
-    <a href="https://yourdomain.com/delight_developer.apk" class="download-btn" download>📲 Download APK</a>
-    
+
+    <button class="download-btn" onclick="confirmDownload()">📲 Download APK</button>
+
+    <div class="progress-container" id="progress-container">
+      <div class="progress-bar-bg">
+        <div id="progress-bar" class="progress-bar-fill">0%</div>
+      </div>
+    </div>
+
     <div class="hero-imgs">
       <img src="developer1.jpg" alt="Dev 1">
       <img src="developer2.jpg" alt="Dev 2">
@@ -282,12 +315,38 @@
     </p>
   </footer>
 
+  <script>
+    function confirmDownload() {
+      const confirmed = confirm("Do you want to download the Delight Developer APK?");
+      if (confirmed) startDownload();
+    }
+
+    function startDownload() {
+      const progressBar = document.getElementById("progress-bar");
+      const progressContainer = document.getElementById("progress-container");
+      const downloadUrl = "https://github.com/Jigar-kar/my-portfolio/releases/download/v2.0/app-debug.zip";
+
+      progressContainer.style.display = "block";
+      let progress = 0;
+
+      const interval = setInterval(() => {
+        if (progress >= 100) {
+          clearInterval(interval);
+          progressBar.textContent = "✅ Download starting...";
+          
+          // Wait a moment before starting the download
+          setTimeout(() => {
+            window.location.href = downloadUrl;
+          }, 500);
+        } else {
+          progress += Math.floor(Math.random() * 10) + 5; // Simulate variable speed
+          if (progress > 100) progress = 100;
+          progressBar.style.width = progress + "%";
+          progressBar.textContent = progress + "%";
+        }
+      }, 200); // update every 200ms
+    }
+  </script>
+
 </body>
 </html>
-
-
-
-
-
-
-
