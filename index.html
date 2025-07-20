@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Delight Developer App - AI Code Preview</title>
+  <title>Delight Developer App - LLM-Powered Assistant</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <style>
@@ -14,82 +14,64 @@
       --text-light: #e0e0f0;
       --text-muted: #a0a0c0;
       --primary-blue: #007BFF;
-      --primary-gradient-start: #007BFF;
-      --primary-gradient-end: #6a1bb2;
       --ai-glow-color: rgba(106, 27, 178, 0.4);
       --border-color: rgba(224, 224, 240, 0.1);
-      --shadow-color: rgba(0, 0, 0, 0.3);
       --font-family: 'Inter', sans-serif;
-      --transition-fast: 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
     body { font-family: var(--font-family); background: var(--bg-dark); color: var(--text-light); line-height: 1.6; overflow-x: hidden; }
     section { padding: 5rem 5%; }
     h2 { font-size: clamp(2.2rem, 5vw, 3rem); margin-bottom: 3rem; text-align: center; font-weight: 800; }
-    nav { display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 5%; position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; transition: background-color 0.4s ease, box-shadow 0.4s ease, padding 0.4s ease; }
-    nav.scrolled { background-color: rgba(30, 30, 51, 0.85); backdrop-filter: blur(10px); box-shadow: 0 4px 20px var(--shadow-color); padding: 0.8rem 5%; }
-    .logo { display: flex; align-items: center; gap: 12px; font-size: 1.5rem; font-weight: 700; color: var(--primary-blue); text-decoration: none; }
-    .logo img { height: 40px; }
-    .nav-links { display: flex; gap: 2.5rem; }
-    .nav-links a { text-decoration: none; color: var(--text-muted); font-weight: 500; transition: color 0.3s ease; }
-    .nav-links a:hover { color: var(--text-light); }
+    nav { display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 5%; position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; transition: background-color 0.4s ease, box-shadow 0.4s ease; }
+    nav.scrolled { background-color: rgba(30, 30, 51, 0.85); backdrop-filter: blur(10px); box-shadow: 0 4px 20px rgba(0,0,0,0.3); }
     .hero-container { display: flex; flex-direction: column; align-items: center; padding-top: 8rem; text-align: center; min-height: 90vh; justify-content: center; }
     h1 { font-size: clamp(2.5rem, 6vw, 3.8rem); margin-bottom: 1rem; font-weight: 800; line-height: 1.2; max-width: 850px; }
     .tagline { font-size: clamp(1rem, 2.5vw, 1.25rem); max-width: 650px; margin-bottom: 2.5rem; color: var(--text-muted); }
     
     /* --- AI Feature Section --- */
     #ai-feature { text-align: center; }
-    .ai-feature-container { display: flex; flex-direction: column; align-items: center; gap: 2rem; }
     .ai-demo-card { background: var(--card-dark); border: 1px solid var(--border-color); border-radius: 15px; padding: 2rem; max-width: 900px; width: 100%; box-shadow: 0 0 50px var(--ai-glow-color); }
     .prompt-area { display: flex; gap: 1rem; margin-bottom: 1.5rem; }
     .prompt-input { flex-grow: 1; background: var(--bg-dark); border: 1px solid var(--border-color); border-radius: 8px; padding: 0.8rem 1rem; color: var(--text-light); font-size: 1rem; }
     .generate-btn { background: var(--primary-blue); color: white; border: none; border-radius: 8px; padding: 0 1.5rem; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 8px; }
     .output-container { display: flex; flex-wrap: wrap; gap: 1rem; }
-    .code-output-wrapper, .live-preview-wrapper { flex: 1; min-width: 300px; border-radius: 8px; padding: 1.5rem; min-height: 250px; transition: background-color 0.4s; }
+    .code-output-wrapper, .live-preview-wrapper { flex: 1; min-width: 300px; border-radius: 8px; padding: 1.5rem; min-height: 300px; transition: background-color 0.4s; }
     .code-output-wrapper { background: #0d1117; text-align: left; font-family: 'Courier New', Courier, monospace; white-space: pre-wrap; color: var(--text-muted); }
     .live-preview-wrapper { background: var(--card-light); display: flex; justify-content: center; align-items: center; font-family: var(--font-family); color: var(--text-muted); }
-    .loading-text { font-style: italic; }
-    /* Syntax Highlighting Colors */
-    .c1 { color: #c98bcf; } .c2 { color: #82aaff; } .c3 { color: #f78c6c; } .c4 { color: #c3e88d; } .c5 { color: #89ddff; } .c6 { color: #637777; }
+    .loading-text, .preview-placeholder { font-style: italic; color: #777; }
+    .blinking-cursor { animation: blink 1s step-end infinite; }
+    @keyframes blink { from, to { color: transparent; } 50% { color: var(--primary-blue); } }
+    /* Syntax Colors */
+    .c-keyword { color: #c98bcf; } .c-function { color: #82aaff; } .c-string { color: #c3e88d; } .c-comment { color: #637777; } .c-tag { color: #f78c6c; } .c-attr { color: #89ddff; }
 
     footer { padding: 3rem 5%; text-align: center; color: var(--text-muted); border-top: 1px solid var(--border-color); margin-top: 5rem; }
-    .animate-on-scroll { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
-    .animate-on-scroll.visible { opacity: 1; transform: translateY(0); }
   </style>
 </head>
 <body>
   <nav id="navbar">
-    <a href="#" class="logo"><img src="https://i.ibb.co/C07kLpW/delight-developer-logo.png" alt="Logo"/> Delight Developer</a>
-    <div class="nav-links">
-      <a href="#home">Home</a>
-      <a href="#ai-feature">AI Assistant</a>
-      <a href="#contact">Contact</a>
-    </div>
-  </nav>
+    </nav>
 
   <main>
     <section class="hero-container" id="home">
-      <h1 class="animate-on-scroll">Build, Test, and Preview with AI.</h1>
-      <p class="tagline animate-on-scroll" style="transition-delay: 0.1s;">The ultimate mobile toolkit for developers. Generate code with our AI assistant and see a live preview instantly.</p>
+      <h1>The AI Co-pilot for Ambitious Developers</h1>
+      <p class="tagline">Generate, debug, and understand code in any language. Your personal LLM assistant, built right into your workflow.</p>
     </section>
 
     <section id="ai-feature">
-      <div class="ai-feature-container">
-        <h2 class="animate-on-scroll">Your AI Co-pilot for Code</h2>
-        <p class="tagline animate-on-scroll" style="transition-delay: 0.1s; margin-top: -2rem;">Describe the UI you want. Our AI will generate the code and a live preview in real-time.</p>
+        <h2 >Ask, and You Shall Receive Code</h2>
+        <p class="tagline" style="margin-top: -2rem;">From Python scripts to complex SQL queries, describe what you need and watch the magic happen.</p>
         
-        <div class="ai-demo-card animate-on-scroll" style="transition-delay: 0.2s;">
+        <div class="ai-demo-card">
           <div class="prompt-area">
-            <input type="text" id="prompt-input" class="prompt-input" placeholder="e.g., 'a blue login button' or 'profile card'">
+            <input type="text" id="prompt-input" class="prompt-input" placeholder="e.g., 'python prime number function'">
             <button id="generate-btn" class="generate-btn"><i class="fas fa-magic"></i> Generate</button>
           </div>
           <div class="output-container">
-            <div id="code-output" class="code-output-wrapper">Your generated code will appear here...</div>
-            <div id="live-preview" class="live-preview-wrapper">Your live preview will appear here...</div>
+            <div id="code-output" class="code-output-wrapper">Your AI-generated response will appear here...<span id="cursor" class="blinking-cursor">|</span></div>
+            <div id="live-preview" class="live-preview-wrapper"><span class="preview-placeholder">Preview for web languages will appear here.</span></div>
           </div>
         </div>
-      </div>
     </section>
   </main>
 
@@ -99,46 +81,69 @@
 
   <script>
     document.addEventListener("DOMContentLoaded", function() {
-      // --- Dynamic Navbar ---
-      const navbar = document.getElementById('navbar');
+      // --- Navbar Scroll ---
       window.addEventListener('scroll', () => {
-        navbar.classList.toggle('scrolled', window.scrollY > 50);
+        document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
       });
 
-      // --- Intersection Observer ---
-      const observer = new IntersectionObserver((entries) => {
-          entries.forEach(entry => {
-              if (entry.isIntersecting) entry.target.classList.add('visible');
-          });
-      }, { threshold: 0.1 });
-      document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
-
-      // --- AI SIMULATION WITH LIVE PREVIEW ---
+      // --- AI SIMULATION SCRIPT ---
       const generateBtn = document.getElementById('generate-btn');
       const promptInput = document.getElementById('prompt-input');
       const codeOutput = document.getElementById('code-output');
       const livePreview = document.getElementById('live-preview');
+      const cursor = document.getElementById('cursor');
 
+      // --- The Upgraded "AI Brain" ---
       const aiResponses = {
         'button': {
-          code: `&lt;<span class="c3">button</span> <span class="c5">style</span>=<span class="c4">"background:#007BFF; color:white; border:none; padding:10px 20px; border-radius:5px; cursor:pointer;"</span>&gt;\n  Login\n&lt;/<span class="c3">button</span>&gt;`,
+          explanation: "Here's a simple HTML button with inline styling:",
+          code: `&lt;<span class="c-tag">button</span> <span class="c-attr">style</span>=<span class="c-string">"..."</span>&gt;Login&lt;/<span class="c-tag">button</span>&gt;`,
           preview: `<button style="background:#007BFF; color:white; border:none; padding:10px 20px; border-radius:5px; cursor:pointer;">Login</button>`
         },
-        'profile card': {
-          code: `&lt;<span class="c3">div</span> <span class="c5">style</span>=<span class="c4">"..."</span>&gt;\n  &lt;<span class="c3">img</span> <span class="c5">src</span>=<span class="c4">"..."</span>&gt;\n  &lt;<span class="c3">h3</span>&gt;Alex Doe&lt;/<span class="c3">h3</span>&gt;\n  &lt;<span class="c3">p</span>&gt;Software Engineer&lt;/<span class="c3">p</span>&gt;\n&lt;/<span class="c3">div</span>&gt;`,
-          preview: `<div style="background-color: #161625; color: #e0e0f0; padding: 20px; border-radius: 10px; text-align: center; width: 200px; font-family: 'Inter', sans-serif;">
-                      <img src="https://i.pravatar.cc/100" style="border-radius: 50%; border: 2px solid #007BFF;">
-                      <h3 style="margin: 10px 0 5px 0;">Alex Doe</h3>
-                      <p style="margin: 0; color: #a0a0c0; font-size: 0.9em;">Software Engineer</p>
-                    </div>`
+        'python': {
+          explanation: "Sure, here is a Python function to check for prime numbers:",
+          code: `<span class="c-keyword">def</span> <span class="c-function">is_prime</span>(n):\n  <span class="c-comment"># Prime numbers must be greater than 1</span>\n  <span class="c-keyword">if</span> n <= 1:\n    <span class="c-keyword">return</span> <span class="c-keyword">False</span>\n  <span class="c-keyword">for</span> i <span class="c-keyword">in</span> <span class="c-function">range</span>(2, <span class="c-function">int</span>(n**0.5) + 1):\n    <span class="c-keyword">if</span> n % i == 0:\n      <span class="c-keyword">return</span> <span class="c-keyword">False</span>\n  <span class="c-keyword">return</span> <span class="c-keyword">True</span>`,
+          preview: null // No visual preview for Python
+        },
+        'sql': {
+            explanation: "Certainly. Here is a basic SQL query to select users from a table:",
+            code: `<span class="c-keyword">SELECT</span> id, username, email\n<span class="c-keyword">FROM</span> users\n<span class="c-keyword">WHERE</span> registration_date > <span class="c-string">'2025-01-01'</span>;`,
+            preview: null
         },
         'default': {
-            code: `<span class="c6">// Sorry, I can't generate that yet.\n// Try 'button' or 'profile card'.</span>`,
-            preview: `<span class="loading-text">No preview available.</span>`
+            explanation: "I can help with that. What language are you thinking of?",
+            code: `<span class="c-comment">// I can generate examples for 'button', 'python', and 'sql'.\n// Give one of those a try!</span>`,
+            preview: null
         }
       };
+      
+      let isTyping = false;
+      let typingInterval;
+
+      function typewriterEffect(element, text) {
+        if (isTyping) {
+          clearInterval(typingInterval);
+        }
+        isTyping = true;
+        element.innerHTML = '';
+        cursor.style.display = 'inline';
+        
+        let i = 0;
+        typingInterval = setInterval(() => {
+          if (i < text.length) {
+            element.innerHTML += text.charAt(i);
+            i++;
+          } else {
+            clearInterval(typingInterval);
+            isTyping = false;
+            cursor.style.display = 'none';
+          }
+        }, 20); // Typing speed
+      }
 
       generateBtn.addEventListener('click', () => {
+        if (isTyping) return; // Prevent new generation while typing
+
         const prompt = promptInput.value.toLowerCase();
         let response = aiResponses.default;
         
@@ -149,14 +154,16 @@
             }
         }
         
-        // Simulate thinking
-        codeOutput.innerHTML = '<span class="loading-text">Generating code...</span>';
-        livePreview.innerHTML = '<span class="loading-text">Loading preview...</span>';
+        // Combine explanation and code for the typewriter
+        const fullResponseText = `${response.explanation}\n\n${response.code}`;
+        typewriterEffect(codeOutput, fullResponseText);
         
-        setTimeout(() => {
-          codeOutput.innerHTML = response.code;
+        // Update preview pane
+        if (response.preview) {
           livePreview.innerHTML = response.preview;
-        }, 1500);
+        } else {
+          livePreview.innerHTML = '<span class="preview-placeholder">No visual preview for this language.</span>';
+        }
       });
     });
   </script>
