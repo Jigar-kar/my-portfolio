@@ -34,7 +34,7 @@
       justify-content: space-between;
       align-items: center;
       padding: 1rem 5%;
-      background: linear-gradient_to_right_#ffffff,_#f9f9f9); /* Subtle gradient */
+      background: linear-gradient(to right, #ffffff, #f9f9f9); /* Subtle gradient */
       box-shadow: 0 4px 15px rgba(0,0,0,0.08); /* Stronger, softer shadow */
       position: sticky;
       top: 0;
@@ -108,7 +108,7 @@
     }
 
     .download-btn {
-      background: linear-gradient_to_right_#007BFF,_#0056b3); /* Gradient button */
+      background: linear-gradient(to right, #007BFF, #0056b3); /* Gradient button */
       color: white;
       padding: 1.2rem 2.8rem; /* Larger button */
       border-radius: 50px; /* Pill-shaped button */
@@ -124,7 +124,7 @@
     }
 
     .download-btn:hover {
-      background: linear-gradient_to_right_#0056b3,_#003d80);
+      background: linear-gradient(to right, #0056b3, #003d80);
       transform: translateY(-3px); /* Lift effect on hover */
       box-shadow: 0 12px 25px rgba(0, 123, 255, 0.4);
     }
@@ -144,7 +144,7 @@
       height: 35px; /* Taller progress bar */
       width: 0%;
       background-color: #28a745;
-      background: linear-gradient_to_right_#28a745,_#218838); /* Gradient fill */
+      background: linear-gradient(to right, #28a745, #218838); /* Gradient fill */
       text-align: center;
       line-height: 35px;
       color: white;
@@ -445,7 +445,7 @@
 <body>
 
   <nav>
-    <img src="https://github.com/Jigar-kar/my-portfolio/blob/main/537e901e-c034-415f-81d4-b3b76a2219d6.png" alt="Delight Developer Logo" class="logo" />
+    <img src="https://i.ibb.co/C07kLpW/delight-developer-logo.png" alt="Delight Developer Logo" class="logo" />
     <div class="nav-links">
       <a href="#home">Home</a>
       <a href="#features">Features</a>
@@ -459,7 +459,7 @@
     <p>A powerful mobile toolkit designed to simplify your dev workflow, boost productivity, and help you build better software — faster.</p>
 
     <button class="download-btn" onclick="confirmDownload()">
-      <img src="https://img.icons8.com/ios-filled/24/FFFFFF/download--v1.png" alt="Download Icon" style="filter: invert(1);"> 
+      <img src="https://img.icons8.com/ios-filled/24/FFFFFF/download--v1.png" alt="Download Icon" style="filter: invert(1);">
       Download APK
     </button>
 
@@ -470,8 +470,8 @@
     </div>
 
     <div class="hero-imgs">
-      <img src="https://via.placeholder.com/280x500?text=App+Screenshot+1" alt="App Screenshot 1">
-      <img src="https://via.placeholder.com/280x500?text=App+Screenshot+2" alt="App Screenshot 2">
+      <img src="https://i.ibb.co/sK08kXQ/app-screenshot-1.jpg" alt="Delight Developer App Screenshot 1">
+      <img src="https://i.ibb.co/yY1h29b/app-screenshot-2.jpg" alt="Delight Developer App Screenshot 2">
     </div>
   </section>
 
@@ -551,10 +551,6 @@
   </footer>
 
   <script>
-    // Placeholder image paths - replace with your actual images!
-    document.querySelector('.hero-imgs img:nth-child(1)').src = 'https://via.placeholder.com/280x500?text=App+Screenshot+1';
-    document.querySelector('.hero-imgs img:nth-child(2)').src = 'https://via.placeholder.com/280x500?text=App+Screenshot+2';
-
     function confirmDownload() {
       const confirmed = confirm("Do you want to download the Delight Developer APK?");
       if (confirmed) startDownload();
