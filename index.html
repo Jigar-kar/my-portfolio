@@ -3,11 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Delight Developer App - Dark Mode</title>
+  <title>Delight Developer App - AI Powered</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <style>
-    /* --- CSS Variables --- */
     :root {
       --bg-dark: #161625;
       --card-dark: #1e1e33;
@@ -16,556 +15,147 @@
       --primary-blue: #007BFF;
       --primary-gradient-start: #007BFF;
       --primary-gradient-end: #6a1bb2;
-      --success-green: #28a745;
+      --ai-glow-color: rgba(106, 27, 178, 0.4);
       --border-color: rgba(224, 224, 240, 0.1);
       --shadow-color: rgba(0, 0, 0, 0.3);
       --font-family: 'Inter', sans-serif;
       --transition-fast: 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
     }
-
-    /* --- General & Accessibility --- */
-    *, *::before, *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      font-family: var(--font-family);
-      background: var(--bg-dark);
-      color: var(--text-light);
-      line-height: 1.6;
-      overflow-x: hidden;
-    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font-family); background: var(--bg-dark); color: var(--text-light); line-height: 1.6; overflow-x: hidden; }
+    section { padding: 5rem 5%; }
+    h2 { font-size: clamp(2.2rem, 5vw, 3rem); margin-bottom: 3rem; text-align: center; font-weight: 800; }
+    .card { background: var(--card-dark); border-radius: 15px; box-shadow: 0 8px 30px var(--shadow-color); transition: transform var(--transition-fast), box-shadow var(--transition-fast); border: 1px solid var(--border-color); }
+    .card:hover { transform: translateY(-8px); box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4); }
+    nav { display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 5%; position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; transition: background-color 0.4s ease, box-shadow 0.4s ease, padding 0.4s ease; }
+    nav.scrolled { background-color: rgba(30, 30, 51, 0.85); backdrop-filter: blur(10px); box-shadow: 0 4px 20px var(--shadow-color); padding: 0.8rem 5%; }
+    .logo { display: flex; align-items: center; gap: 12px; font-size: 1.5rem; font-weight: 700; color: var(--primary-blue); text-decoration: none; }
+    .logo img { height: 40px; }
+    .nav-links { display: flex; gap: 2.5rem; }
+    .nav-links a { text-decoration: none; color: var(--text-muted); font-weight: 500; transition: color 0.3s ease; }
+    .nav-links a:hover, .nav-links a.active { color: var(--text-light); }
+    .hero-container { display: flex; flex-direction: column; align-items: center; padding-top: 8rem; text-align: center; min-height: 100vh; justify-content: center; }
+    h1 { font-size: clamp(2.5rem, 6vw, 3.8rem); margin-bottom: 1rem; font-weight: 800; line-height: 1.2; max-width: 850px; }
+    .tagline { font-size: clamp(1rem, 2.5vw, 1.25rem); max-width: 650px; margin-bottom: 2.5rem; color: var(--text-muted); }
+    .download-btn { background: linear-gradient(45deg, var(--primary-gradient-start), var(--primary-gradient-end)); color: white; padding: 1rem 2.5rem; border-radius: 50px; font-size: 1.1rem; text-decoration: none; transition: all var(--transition-fast); border: none; cursor: pointer; box-shadow: 0 8px 25px rgba(0, 123, 255, 0.3); display: inline-flex; align-items: center; gap: 10px; font-weight: 600; }
+    .download-btn:hover { transform: translateY(-5px) scale(1.05); box-shadow: 0 15px 35px rgba(0, 123, 255, 0.4); }
     
-    section {
-        padding: 5rem 5%;
-    }
+    /* --- AI Feature Section --- */
+    #ai-feature { text-align: center; }
+    .ai-feature-container { display: flex; flex-direction: column; align-items: center; gap: 2rem; }
+    .ai-demo-card { background: var(--card-dark); border: 1px solid var(--border-color); border-radius: 15px; padding: 2rem; max-width: 700px; width: 100%; box-shadow: 0 0 40px var(--ai-glow-color); }
+    .prompt-area { display: flex; gap: 1rem; margin-bottom: 1.5rem; }
+    .prompt-input { flex-grow: 1; background: var(--bg-dark); border: 1px solid var(--border-color); border-radius: 8px; padding: 0.8rem 1rem; color: var(--text-light); font-size: 1rem; transition: border-color 0.3s, box-shadow 0.3s; }
+    .prompt-input:focus { outline: none; border-color: var(--primary-blue); box-shadow: 0 0 10px rgba(0, 123, 255, 0.3); }
+    .generate-btn { background: var(--primary-blue); color: white; border: none; border-radius: 8px; padding: 0 1.5rem; font-weight: 600; cursor: pointer; transition: background-color 0.3s; display: flex; align-items: center; gap: 8px; }
+    .generate-btn:hover { background: #0056b3; }
+    .code-output-wrapper { background: #0d1117; border-radius: 8px; padding: 1.5rem; min-height: 200px; text-align: left; font-family: 'Courier New', Courier, monospace; white-space: pre-wrap; transition: background-color 0.4s; }
+    .code-output-wrapper.loading { display: flex; justify-content: center; align-items: center; color: var(--text-muted); font-style: italic; }
+    .code-output-wrapper .c1 { color: #c98bcf; } .code-output-wrapper .c2 { color: #82aaff; } .code-output-wrapper .c3 { color: #f78c6c; } .code-output-wrapper .c4 { color: #c3e88d; } .code-output-wrapper .c5 { color: #89ddff; } .code-output-wrapper .c6 { color: #637777; }
 
-    /* --- Navigation --- */
-    nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1.2rem 5%;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      z-index: 1000;
-      transition: background-color 0.4s ease, box-shadow 0.4s ease, padding 0.4s ease;
-    }
-    
-    nav.scrolled {
-        background-color: rgba(30, 30, 51, 0.85);
-        backdrop-filter: blur(10px);
-        box-shadow: 0 4px 20px var(--shadow-color);
-        padding: 0.8rem 5%;
-    }
-
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: var(--primary-blue);
-      text-decoration: none;
-    }
-
-    .logo img {
-      height: 40px;
-      transition: transform 0.3s ease;
-    }
-    .logo:hover img {
-        transform: rotate(-15deg);
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 2.5rem;
-    }
-
-    .nav-links a {
-      text-decoration: none;
-      color: var(--text-muted);
-      font-weight: 500;
-      transition: color 0.3s ease;
-      position: relative;
-    }
-    
-    .nav-links a:hover, .nav-links a.active {
-      color: var(--text-light);
-    }
-    
-    /* --- Hero Section --- */
-    .hero-container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding-top: 8rem;
-      text-align: center;
-      min-height: 100vh;
-      justify-content: center;
-    }
-
-    h1 {
-      font-size: clamp(2.5rem, 6vw, 3.8rem);
-      margin-bottom: 1rem;
-      font-weight: 800;
-      line-height: 1.2;
-      max-width: 850px;
-      text-shadow: 0 0 15px rgba(0, 123, 255, 0.3);
-    }
-
-    .tagline {
-      font-size: clamp(1rem, 2.5vw, 1.25rem);
-      max-width: 650px;
-      margin-bottom: 2.5rem;
-      color: var(--text-muted);
-    }
-
-    .download-btn {
-      background: linear-gradient(45deg, var(--primary-gradient-start), var(--primary-gradient-end));
-      color: white;
-      padding: 1rem 2.5rem;
-      border-radius: 50px;
-      font-size: 1.1rem;
-      text-decoration: none;
-      transition: all var(--transition-fast);
-      border: none;
-      cursor: pointer;
-      box-shadow: 0 8px 25px rgba(0, 123, 255, 0.3);
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      font-weight: 600;
-    }
-
-    .download-btn:hover, .download-btn:focus {
-      transform: translateY(-5px) scale(1.05);
-      box-shadow: 0 15px 35px rgba(0, 123, 255, 0.4);
-      outline: none;
-    }
-    
-    .hero-visuals {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 2rem;
-      margin-top: 4rem;
-      flex-wrap: wrap;
-    }
-    
-    /* --- Interactive Code Demo --- */
-    .code-demo {
-        background: #0d1117;
-        border: 1px solid var(--border-color);
-        border-radius: 12px;
-        width: 380px;
-        height: 500px;
-        box-shadow: 0 15px 50px var(--shadow-color);
-        font-family: 'Fira Code', 'Courier New', monospace;
-        font-size: 0.85rem;
-        overflow: hidden;
-        display: flex;
-        flex-direction: column;
-    }
-    .code-demo-header {
-        background: #1e1e33;
-        padding: 10px;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-    }
-    .code-demo-header span {
-        width: 12px; height: 12px; border-radius: 50%;
-    }
-    .code-demo-header .dot-1 { background: #ff5f56; }
-    .code-demo-header .dot-2 { background: #ffbd2e; }
-    .code-demo-header .dot-3 { background: #27c93f; }
-
-    .code-demo-body {
-        padding: 1.5rem;
-        white-space: pre;
-        line-height: 1.6;
-        animation: typing 5s steps(40, end) infinite alternate;
-        overflow: hidden;
-        border-right: .15em solid var(--primary-blue);
-    }
-    
-    .code-demo .c1 { color: #c98bcf; } /* Purple */
-    .code-demo .c2 { color: #82aaff; } /* Blue */
-    .code-demo .c3 { color: #f78c6c; } /* Orange */
-    .code-demo .c4 { color: #c3e88d; } /* Green */
-    .code-demo .c5 { color: #89ddff; } /* Cyan */
-    .code-demo .c6 { color: #637777; } /* Comment */
-
-    @keyframes typing {
-        from { width: 0 }
-        to { width: 100% }
-    }
-    
-    /* --- Shared Styles --- */
-    h2 {
-      font-size: clamp(2.2rem, 5vw, 3rem);
-      margin-bottom: 3rem;
-      text-align: center;
-      font-weight: 800;
-    }
-    .card {
-      background: var(--card-dark);
-      border-radius: 15px;
-      box-shadow: 0 8px 30px var(--shadow-color);
-      transition: transform var(--transition-fast), box-shadow var(--transition-fast);
-      border: 1px solid var(--border-color);
-    }
-    .card:hover {
-        transform: translateY(-8px);
-        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
-    }
-
-    /* --- Features Section --- */
-    .feature-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 2rem;
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-    .feature {
-      padding: 2rem;
-      text-align: center;
-    }
-    .feature i {
-      font-size: 2.8rem;
-      color: var(--primary-blue);
-      margin-bottom: 1.5rem;
-    }
-    .feature h3 {
-      font-size: 1.4rem;
-      margin-bottom: 0.5rem;
-    }
-    .feature p {
-      font-size: 1rem;
-      color: var(--text-muted);
-    }
-
-    /* --- Testimonials Section --- */
-    #testimonials {
-        background-color: var(--bg-dark);
-    }
-    .testimonial-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 2rem;
-        max-width: 1100px;
-        margin: 0 auto;
-    }
-    .testimonial-card {
-        padding: 2rem;
-        display: flex;
-        flex-direction: column;
-    }
-    .testimonial-card p {
-        font-style: italic;
-        color: var(--text-muted);
-        flex-grow: 1;
-        margin-bottom: 1.5rem;
-    }
-    .testimonial-card .author {
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-    }
-    .testimonial-card .author img {
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-        border: 2px solid var(--primary-blue);
-    }
-    .testimonial-card .author-info h4 {
-        margin: 0;
-        font-size: 1.1rem;
-        color: var(--text-light);
-    }
-    .testimonial-card .author-info span {
-        font-size: 0.9rem;
-        color: var(--primary-blue);
-    }
-    
-    /* --- Counters Section --- */
-    .counters {
-        display: flex;
-        justify-content: space-around;
-        text-align: center;
-        flex-wrap: wrap;
-        gap: 2rem;
-        background: var(--card-dark);
-        padding-top: 4rem;
-        padding-bottom: 4rem;
-        border-radius: 20px;
-        max-width: 1100px;
-        margin: 0 auto;
-    }
-    .counter {
-        flex: 1;
-        min-width: 200px;
-    }
-    .counter h3 {
-      font-size: clamp(2.5rem, 6vw, 3.5rem);
-      color: var(--primary-blue);
-      margin-bottom: 0.5rem;
-      font-weight: 800;
-    }
-    .counter p {
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-    
-    /* --- Footer --- */
-    footer {
-      padding: 3rem 5%;
-      text-align: center;
-      color: var(--text-muted);
-      border-top: 1px solid var(--border-color);
-      margin-top: 5rem;
-    }
-
-    /* --- Scroll & Modal Animations --- */
-    .animate-on-scroll {
-        opacity: 0;
-        transform: translateY(30px);
-        transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-    }
-    .animate-on-scroll.visible {
-        opacity: 1;
-        transform: translateY(0);
-    }
-    
-    /* Modal styles remain the same from previous version */
-    .modal-backdrop { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(5px); z-index: 10002; display: flex; justify-content: center; align-items: center; opacity: 0; visibility: hidden; transition: opacity 0.3s ease, visibility 0.3s ease; }
-    .modal-backdrop.visible { opacity: 1; visibility: visible; }
-    .modal-content { background: var(--card-dark); padding: 2.5rem; border-radius: 20px; text-align: center; max-width: 450px; width: 90%; border: 1px solid var(--border-color); box-shadow: 0 10px 50px rgba(0,0,0,0.5); transform: scale(0.9); transition: transform 0.3s ease; }
-    .modal-backdrop.visible .modal-content { transform: scale(1); }
-    .modal-content h3 { font-size: 1.8rem; margin-bottom: 1rem; }
-    .modal-content p { color: var(--text-muted); margin-bottom: 2rem; }
-    .modal-buttons { display: flex; gap: 1rem; justify-content: center; }
-    .modal-btn { padding: 0.8rem 1.8rem; border: none; border-radius: 10px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: all var(--transition-fast); }
-    .modal-btn.confirm { background: var(--primary-blue); color: white; }
-    .modal-btn.confirm:hover { background: #0056b3; transform: translateY(-3px); }
-    .modal-btn.cancel { background: #4a4a6a; color: var(--text-light); }
-    .modal-btn.cancel:hover { background: #5a5a7a; }
-
-    /* --- Responsive --- */
-    @media (max-width: 768px) {
-      .nav-links { display: none; }
-      nav { justify-content: center; }
-      .hero-visuals { flex-direction: column; align-items: center; }
-    }
+    /* --- Other Sections --- */
+    footer { padding: 3rem 5%; text-align: center; color: var(--text-muted); border-top: 1px solid var(--border-color); margin-top: 5rem; }
+    .animate-on-scroll { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
+    .animate-on-scroll.visible { opacity: 1; transform: translateY(0); }
   </style>
 </head>
 <body>
-
   <nav id="navbar">
-    <a href="#" class="logo" aria-label="Delight Developer Home">
-      <img src="https://i.ibb.co/C07kLpW/delight-developer-logo.png" alt="Delight Developer Logo" />
+    <a href="#" class="logo">
+      <img src="https://i.ibb.co/C07kLpW/delight-developer-logo.png" alt="Logo" />
       Delight Developer
     </a>
     <div class="nav-links">
       <a href="#home" class="active">Home</a>
-      <a href="#features">Features</a>
-      <a href="#testimonials">Testimonials</a>
+      <a href="#ai-feature">AI Assistant</a>
       <a href="#contact">Contact</a>
     </div>
   </nav>
 
   <main>
     <section class="hero-container" id="home">
-      <h1 class="animate-on-scroll">Build Better Software, Faster. Right From Your Phone.</h1>
-      <p class="tagline animate-on-scroll" style="transition-delay: 0.1s;">The ultimate mobile toolkit for developers on the go. Code, manage, and deploy with unparalleled ease and power.</p>
-
-      <button class="download-btn animate-on-scroll" style="transition-delay: 0.2s;" id="download-btn">
+      <h1 class="animate-on-scroll">Build Better Software, Faster. Now with AI.</h1>
+      <p class="tagline animate-on-scroll" style="transition-delay: 0.1s;">The ultimate mobile toolkit for developers on the go. Code, manage, and deploy with the power of an integrated AI assistant.</p>
+      <button class="download-btn animate-on-scroll" style="transition-delay: 0.2s;">
         <i class="fas fa-download"></i> Download APK
       </button>
+    </section>
 
-      <div class="hero-visuals">
-        <img src="https://i.ibb.co/yY1h29b/app-screenshot-2.jpg" alt="Delight Developer App Dashboard" class="card animate-on-scroll" style="width: 380px; height: 500px; object-fit: cover; transition-delay: 0.3s;">
-        <div class="code-demo card animate-on-scroll" style="transition-delay: 0.4s;">
-            <div class="code-demo-header">
-                <span class="dot-1"></span><span class="dot-2"></span><span class="dot-3"></span>
-            </div>
-            <div class="code-demo-body">
-<span class="c1">import</span> React <span class="c1">from</span> <span class="c4">'react'</span>;
-
-<span class="c1">const</span> <span class="c2">WelcomeCard</span> = () => {
-  <span class="c1">return</span> (
-    &lt;<span class="c3">div</span> <span class="c5">className</span>=<span class="c4">'greeting'</span>&gt;
-      &lt;<span class="c3">h1</span>&gt;Hello, Developer!&lt;/<span class="c3">h1</span>&gt;
-      <span class="c6">// Start coding...</span>
-    &lt;/<span class="c3">div</span>&gt;
-  );
-};
-            </div>
+    <section id="ai-feature">
+      <div class="ai-feature-container">
+        <h2 class="animate-on-scroll">Meet Your AI Code Assistant ✨</h2>
+        <p class="tagline animate-on-scroll" style="transition-delay: 0.1s; margin-top: -2rem;">Stuck on a problem? Need boilerplate code? Just ask our AI. Generate components, functions, and queries in seconds.</p>
+        
+        <div class="ai-demo-card animate-on-scroll" style="transition-delay: 0.2s;">
+          <div class="prompt-area">
+            <input type="text" id="prompt-input" class="prompt-input" placeholder="e.g., 'create a login button in react'">
+            <button id="generate-btn" class="generate-btn">
+              <i class="fas fa-magic"></i> Generate
+            </button>
+          </div>
+          <div id="code-output" class="code-output-wrapper">
+            Your generated code will appear here...
+          </div>
         </div>
       </div>
     </section>
-
-    <section id="features">
-      <h2 class="animate-on-scroll">Everything You Need in One App</h2>
-      <div class="feature-grid">
-        <div class="feature card animate-on-scroll">
-          <i class="fas fa-terminal"></i>
-          <h3>Smart Code Editor</h3>
-          <p>Intelligent code completion and syntax highlighting for a fluid workflow.</p>
-        </div>
-        <div class="feature card animate-on-scroll" style="transition-delay: 0.1s;">
-          <i class="fab fa-git-alt"></i>
-          <h3>Git Integration</h3>
-          <p>Manage your repositories with push, pull, and merge commands on the fly.</p>
-        </div>
-        <div class="feature card animate-on-scroll" style="transition-delay: 0.2s;">
-          <i class="fas fa-rocket"></i>
-          <h3>One-Click Deploy</h3>
-          <p>Deploy your projects to popular hosting platforms directly from the app.</p>
-        </div>
-        <div class="feature card animate-on-scroll" style="transition-delay: 0.3s;">
-          <i class="fas fa-chart-line"></i>
-          <h3>Live Analytics</h3>
-          <p>Monitor app performance and user metrics with real-time dashboards.</p>
-        </div>
-      </div>
-    </section>
-    
-    <section id="testimonials">
-        <h2 class="animate-on-scroll">What Developers Say</h2>
-        <div class="testimonial-grid">
-            <div class="testimonial-card card animate-on-scroll">
-                <p>"This app has completely changed how I work. The ability to push a quick fix from my phone is a lifesaver. Absolutely essential for any modern developer."</p>
-                <div class="author">
-                    <img src="https://i.pravatar.cc/100?u=a" alt="Avatar of Maya Chen">
-                    <div class="author-info">
-                        <h4>Maya Chen</h4>
-                        <span>Full-Stack Developer</span>
-                    </div>
-                </div>
-            </div>
-            <div class="testimonial-card card animate-on-scroll" style="transition-delay: 0.15s;">
-                <p>"The UI is clean, intuitive, and surprisingly powerful for a mobile app. The Git integration is seamless. Two thumbs up from me!"</p>
-                <div class="author">
-                    <img src="https://i.pravatar.cc/100?u=b" alt="Avatar of David Rodriguez">
-                    <div class="author-info">
-                        <h4>David Rodriguez</h4>
-                        <span>Mobile App Specialist</span>
-                    </div>
-                </div>
-            </div>
-             <div class="testimonial-card card animate-on-scroll" style="transition-delay: 0.3s;">
-                <p>"I was skeptical about a mobile IDE, but Delight Developer proved me wrong. It's fast, reliable, and has become a core part of my toolkit."</p>
-                <div class="author">
-                    <img src="https://i.pravatar.cc/100?u=c" alt="Avatar of Sarah Jenkins">
-                    <div class="author-info">
-                        <h4>Sarah Jenkins</h4>
-                        <span>DevOps Engineer</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section>
-        <div class="counters animate-on-scroll">
-          <div class="counter">
-            <h3 data-target="10000">0</h3>
-            <p>Happy Developers</p>
-          </div>
-          <div class="counter">
-            <h3 data-target="25000">0</h3>
-            <p>Downloads</p>
-          </div>
-          <div class="counter">
-            <h3>99.9%</h3>
-            <p>Uptime</p>
-          </div>
-        </div>
-    </section>
-
   </main>
 
   <footer id="contact">
     <p>© 2025 Delight Developer | All Rights Reserved</p>
-    <a href="mailto:support@delightdeveloper.com" style="color: var(--primary-blue); text-decoration: none;">Contact Support</a>
   </footer>
-  
-  <div class="modal-backdrop" id="modal-backdrop">
-      </div>
 
   <script>
     document.addEventListener("DOMContentLoaded", function() {
-    
       // --- Dynamic Navbar ---
       const navbar = document.getElementById('navbar');
       window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) {
-          navbar.classList.add('scrolled');
-        } else {
-          navbar.classList.remove('scrolled');
-        }
+        navbar.classList.toggle('scrolled', window.scrollY > 50);
       });
-      
-      // --- Intersection Observer for Scroll Animations ---
-      const animatedElements = document.querySelectorAll('.animate-on-scroll');
+
+      // --- Intersection Observer ---
       const observer = new IntersectionObserver((entries) => {
           entries.forEach(entry => {
-              if (entry.isIntersecting) {
-                  entry.target.classList.add('visible');
-                  // observer.unobserve(entry.target); // Uncomment to animate only once
-              } else {
-                  // entry.target.classList.remove('visible'); // Uncomment to re-animate on scroll up
-              }
+              if (entry.isIntersecting) entry.target.classList.add('visible');
           });
       }, { threshold: 0.1 });
+      document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
 
-      animatedElements.forEach(el => observer.observe(el));
-      
-      // --- Animated Number Counters ---
-      const counterObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const counter = entry.target;
-                const target = +counter.getAttribute('data-target');
-                
-                const updateCounter = () => {
-                    const current = +counter.innerText.replace(/,/g, '');
-                    const increment = target / 100;
-                    
-                    if (current < target) {
-                        counter.innerText = Math.ceil(current + increment).toLocaleString();
-                        setTimeout(updateCounter, 20);
-                    } else {
-                        counter.innerText = target.toLocaleString() + (target === 25000 ? '+' : 'K+');
-                    }
-                };
-                updateCounter();
-                observer.unobserve(counter); // Animate only once
+      // --- AI SIMULATION SCRIPT ---
+      const generateBtn = document.getElementById('generate-btn');
+      const promptInput = document.getElementById('prompt-input');
+      const codeOutput = document.getElementById('code-output');
+
+      // This is our "AI Brain" - a simple dictionary of prompts and responses
+      const aiResponses = {
+        'login button': `<span class="c1">import</span> React <span class="c1">from</span> <span class="c4">'react'</span>;\n\n<span class="c1">const</span> <span class="c2">LoginButton</span> = () => {\n  <span class="c1">return</span> (\n    &lt;<span class="c3">button</span> <span class="c5">onClick</span>={() => <span class="c2">alert</span>(<span class="c4">'Logged In!'</span>)}&gt;\n      Login\n    &lt;/<span class="c3">button</span>&gt;\n  );\n};`,
+        'css animation': `<span class="c6">/* Simple Fade-in Animation */</span>\n\n<span class="c3">@keyframes</span> fadeIn {\n  <span class="c1">from</span> { <span class="c5">opacity</span>: <span class="c4">0</span>; }\n  <span class="c1">to</span> { <span class="c5">opacity</span>: <span class="c4">1</span>; }\n}\n\n<span class="c2">.animated-element</span> {\n  <span class="c5">animation</span>: fadeIn <span class="c4">1.5s</span> ease-in-out;\n}`,
+        'fetch data': `<span class="c1">async function</span> <span class="c2">fetchUserData</span>() {\n  <span class="c1">const</span> url = <span class="c4">'https://api.example.com/user/1'</span>;\n  <span class="c1">try</span> {\n    <span class="c1">const</span> response = <span class="c1">await</span> <span class="c2">fetch</span>(url);\n    <span class="c1">const</span> data = <span class="c1">await</span> response.<span class="c2">json</span>();\n    <span class="c2">console</span>.<span class="c2">log</span>(data);\n  } <span class="c1">catch</span> (error) {\n    <span class="c2">console</span>.<span class="c2">error</span>(<span class="c4">'Fetch failed:'</span>, error);\n  }\n}`
+      };
+
+      generateBtn.addEventListener('click', () => {
+        const prompt = promptInput.value.toLowerCase();
+        let response = `<span class="c6">// Sorry, I don't have a response for that yet. \n// Try 'login button', 'css animation', or 'fetch data'.</span>`;
+        
+        // Find a matching response
+        for (const key in aiResponses) {
+            if (prompt.includes(key)) {
+                response = aiResponses[key];
+                break;
             }
-        });
-      }, { threshold: 0.8 });
-      
-      document.querySelectorAll('.counter h3[data-target]').forEach(counter => {
-        counterObserver.observe(counter);
+        }
+        
+        // Simulate thinking
+        codeOutput.classList.add('loading');
+        codeOutput.innerHTML = 'Generating...';
+        
+        setTimeout(() => {
+          codeOutput.innerHTML = response;
+          codeOutput.classList.remove('loading');
+        }, 1500); // 1.5 second delay
       });
-      
-      // Other scripts like modal logic can be placed here...
-      // For brevity, the modal script from the previous version is assumed to be here.
-    
     });
   </script>
-
 </body>
 </html>
