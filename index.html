@@ -4,7 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Delight Developer App</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-6EHHNTQQ03"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -22,10 +23,27 @@
       font-family: 'Poppins', sans-serif;
       margin: 0;
       padding: 0;
-      background: #f4f7fa; /* Lighter, more modern background */
+      background: #f8fbfd; /* Very light, professional background */
       color: #333;
       scroll-behavior: smooth;
-      line-height: 1.6;
+      line-height: 1.7; /* Increased line height for readability */
+      overflow-x: hidden; /* Prevent horizontal scroll */
+    }
+
+    /* Accessibility: Skip to Content */
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: #007BFF;
+      color: white;
+      padding: 8px;
+      z-index: 10000;
+      text-decoration: none;
+      transition: top 0.3s;
+    }
+    .skip-link:focus {
+      top: 0;
     }
 
     /* Navigation Bar */
@@ -34,39 +52,53 @@
       justify-content: space-between;
       align-items: center;
       padding: 1rem 5%;
-      background: linear-gradient(to right, #ffffff, #f9f9f9); /* Subtle gradient */
-      box-shadow: 0 4px 15px rgba(0,0,0,0.08); /* Stronger, softer shadow */
+      background: #ffffff;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.07); /* Softer, wider shadow */
       position: sticky;
       top: 0;
       z-index: 1000;
-      border-bottom: 1px solid #eee;
+      border-bottom: 1px solid #e0e0e0; /* Lighter border */
     }
 
     .logo {
-      height: 45px; /* Slightly larger logo */
+      height: 48px; /* Slightly larger logo */
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #007BFF;
+      text-decoration: none;
+    }
+
+    .logo img {
+      height: 40px;
     }
 
     .nav-links {
       display: flex;
-      gap: 2.5rem; /* Increased gap */
+      gap: 3rem; /* More space between links */
     }
 
     .nav-links a {
       text-decoration: none;
-      color: #444; /* Darker, more refined link color */
-      font-weight: 600; /* Bolder links */
+      color: #555; /* Neutral link color */
+      font-weight: 500; /* Medium weight */
       transition: color 0.3s ease, transform 0.2s ease;
       position: relative;
+      padding: 5px 0; /* Add padding for larger click area */
     }
 
     .nav-links a::after {
       content: '';
       position: absolute;
       width: 0%;
-      height: 2px;
-      bottom: -5px;
-      left: 0;
+      height: 3px; /* Thicker underline */
+      bottom: -8px; /* Lower underline */
+      left: 50%; /* Start from center */
+      transform: translateX(-50%); /* Center the line */
       background-color: #007BFF;
+      border-radius: 2px;
       transition: width 0.3s ease;
     }
 
@@ -84,270 +116,287 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 5rem 5% 3rem; /* Adjusted padding */
+      padding: 6rem 5% 4rem; /* More generous padding */
       text-align: center;
       background: #ffffff;
-      border-bottom-left-radius: 50px; /* Rounded corners */
-      border-bottom-right-radius: 50px;
-      box-shadow: 0 8px 25px rgba(0,0,0,0.05);
+      border-bottom-left-radius: 60px; /* More pronounced rounding */
+      border-bottom-right-radius: 60px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08); /* More subtle, wider shadow */
     }
 
     h1 {
-      font-size: 3.5rem; /* Larger heading */
+      font-size: 4rem; /* Even larger, more impactful heading */
       color: #1a1a1a;
       margin-bottom: 1.5rem;
-      font-weight: 700; /* Bolder heading */
-      line-height: 1.2;
+      font-weight: 700;
+      line-height: 1.15;
+      max-width: 900px;
     }
 
-    .container p {
-      font-size: 1.25rem; /* Larger paragraph */
+    .tagline {
+      font-size: 1.4rem; /* Larger, more prominent tagline */
       max-width: 800px;
-      margin-bottom: 3rem;
+      margin-bottom: 3.5rem; /* More space */
       color: #555;
+      font-weight: 400;
     }
 
     .download-btn {
-      background: linear-gradient(to right, #007BFF, #0056b3); /* Gradient button */
+      background: linear-gradient(45deg, #007BFF, #0056b3); /* Angled gradient */
       color: white;
-      padding: 1.2rem 2.8rem; /* Larger button */
-      border-radius: 50px; /* Pill-shaped button */
-      font-size: 1.2rem;
+      padding: 1.3rem 3rem; /* Larger button */
+      border-radius: 60px; /* Fully rounded, pill shape */
+      font-size: 1.3rem;
       text-decoration: none;
-      transition: all 0.3s ease;
+      transition: all 0.4s ease; /* Slower, smoother transition */
       border: none;
       cursor: pointer;
-      box-shadow: 0 8px 20px rgba(0, 123, 255, 0.3);
+      box-shadow: 0 10px 25px rgba(0, 123, 255, 0.4);
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
+      font-weight: 600;
+      text-transform: uppercase; /* Uppercase text */
+      letter-spacing: 0.5px;
     }
 
     .download-btn:hover {
-      background: linear-gradient(to right, #0056b3, #003d80);
-      transform: translateY(-3px); /* Lift effect on hover */
-      box-shadow: 0 12px 25px rgba(0, 123, 255, 0.4);
+      background: linear-gradient(45deg, #0056b3, #003d80);
+      transform: translateY(-5px); /* More pronounced lift */
+      box-shadow: 0 15px 35px rgba(0, 123, 255, 0.5);
+    }
+
+    .download-btn i {
+      font-size: 1.5rem; /* Larger icon */
     }
 
     .progress-container {
       display: none;
-      margin-top: 30px;
+      margin-top: 40px;
       width: 100%;
-      max-width: 700px;
-      background: #e9ecef; /* Lighter progress bar background */
-      border-radius: 15px;
+      max-width: 750px;
+      background: #e9ecef;
+      border-radius: 20px; /* More rounded progress bar container */
       overflow: hidden;
-      box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+      box-shadow: inset 0 2px 5px rgba(0,0,0,0.1);
     }
 
     .progress-bar-fill {
-      height: 35px; /* Taller progress bar */
+      height: 40px; /* Taller progress bar */
       width: 0%;
-      background-color: #28a745;
-      background: linear-gradient(to right, #28a745, #218838); /* Gradient fill */
+      background: linear-gradient(to right, #28a745, #218838);
       text-align: center;
-      line-height: 35px;
+      line-height: 40px;
       color: white;
       font-weight: bold;
-      transition: width 0.4s ease-out; /* Smoother transition */
-      border-radius: 15px 0 0 15px; /* Rounded only on the left initially */
+      transition: width 0.5s ease-out; /* Even smoother transition */
+      border-radius: 20px 0 0 20px;
+      white-space: nowrap; /* Prevent text wrapping */
+      padding: 0 15px; /* Add padding for text */
     }
 
     .hero-imgs {
       display: flex;
       justify-content: center;
-      gap: 3rem; /* Increased gap */
-      margin-top: 4rem; /* More space below button */
-      flex-wrap: wrap; /* Allows wrapping on smaller screens */
+      gap: 3.5rem; /* More space between images */
+      margin-top: 5rem; /* More space below button */
+      flex-wrap: wrap;
     }
 
     .hero-imgs img {
-      width: 280px; /* Slightly larger images */
-      border-radius: 20px; /* More rounded corners */
-      box-shadow: 0 10px 30px rgba(0,0,0,0.15); /* More prominent shadow */
-      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      width: 320px; /* Larger images */
+      border-radius: 25px; /* Even more rounded corners */
+      box-shadow: 0 15px 45px rgba(0,0,0,0.2); /* More prominent, soft shadow */
+      transition: transform 0.5s ease, box-shadow 0.5s ease;
+      object-fit: cover; /* Ensure images fill their space */
+      max-height: 600px; /* Prevent excessively tall images */
     }
 
     .hero-imgs img:hover {
-      transform: translateY(-8px) scale(1.03); /* Lift and slight scale on hover */
-      box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+      transform: translateY(-12px) scale(1.04); /* More pronounced lift and scale */
+      box-shadow: 0 20px 55px rgba(0,0,0,0.3);
     }
 
     /* Features Section */
     .features {
-      background: #f9f9f9;
-      padding: 5rem 5%; /* More vertical padding */
+      background: #f8fbfd; /* Match body background */
+      padding: 6rem 5%; /* Consistent padding */
       text-align: center;
       position: relative;
-      overflow: hidden; /* To contain background elements */
     }
 
     .features h2 {
-      font-size: 2.8rem; /* Larger heading */
-      margin-bottom: 3.5rem; /* More space */
+      font-size: 3.5rem;
+      margin-bottom: 4rem;
       color: #1a1a1a;
       font-weight: 700;
     }
 
     .feature-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Adjusted minmax */
-      gap: 3rem; /* Increased gap */
-      max-width: 1200px; /* Wider grid */
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Adjusted minmax */
+      gap: 3.5rem; /* More gap */
+      max-width: 1200px;
       margin: 0 auto;
     }
 
     .feature {
       background: white;
-      padding: 2.5rem; /* More padding */
-      border-radius: 15px; /* More rounded corners */
-      box-shadow: 0 6px 25px rgba(0,0,0,0.08); /* Softer shadow */
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      padding: 3rem; /* More padding */
+      border-radius: 20px; /* More rounded corners */
+      box-shadow: 0 8px 30px rgba(0,0,0,0.1); /* Softer, deeper shadow */
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
       display: flex;
       flex-direction: column;
       align-items: center;
       text-align: center;
-      border: 1px solid #eee; /* Subtle border */
+      border: 1px solid #f0f0f0; /* Very subtle border */
     }
 
     .feature:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 10px 35px rgba(0,0,0,0.12);
+      transform: translateY(-10px);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.15);
     }
 
-    .feature img {
-      width: 60px; /* Larger icons */
-      height: 60px;
-      margin-bottom: 1rem;
-      filter: drop-shadow(0 3px 6px rgba(0, 123, 255, 0.2)); /* Subtle icon shadow */
+    .feature i { /* For Font Awesome icons */
+      font-size: 3.5rem; /* Larger icons */
+      color: #007BFF;
+      margin-bottom: 1.5rem;
+      text-shadow: 0 3px 8px rgba(0, 123, 255, 0.3); /* Soft icon shadow */
     }
 
     .feature h3 {
-      margin-top: 1rem;
-      font-size: 1.4rem; /* Larger heading */
+      margin-top: 0.5rem; /* Adjust margin */
+      font-size: 1.6rem; /* Larger heading */
       color: #333;
       font-weight: 600;
     }
 
     .feature p {
-      font-size: 1rem;
+      font-size: 1.1rem;
       color: #666;
+      line-height: 1.8;
     }
 
     /* Counters Section */
     .counters {
       display: flex;
       justify-content: space-around;
-      margin: 5rem 0; /* More vertical space */
+      margin: 6rem 0;
       text-align: center;
-      flex-wrap: wrap; /* Allow wrapping */
-      gap: 2rem; /* Gap for wrapped items */
+      flex-wrap: wrap;
+      gap: 3rem; /* More gap for wrapped items */
     }
 
     .counter {
       background: #ffffff;
-      padding: 2rem 3rem;
-      border-radius: 15px;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+      padding: 2.5rem 3.5rem;
+      border-radius: 20px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.07);
       flex: 1;
-      min-width: 200px;
-      max-width: 300px;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      min-width: 220px; /* Slightly larger min-width */
+      max-width: 320px;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
     }
 
     .counter:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      transform: translateY(-8px);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.1);
     }
 
     .counter h3 {
-      font-size: 3rem; /* Larger numbers */
+      font-size: 3.8rem; /* Even larger numbers */
       color: #007BFF;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.8rem;
       font-weight: 700;
     }
 
     .counter p {
-      font-size: 1.1rem;
+      font-size: 1.2rem;
       color: #555;
       font-weight: 500;
+      text-transform: uppercase; /* Uppercase labels */
+      letter-spacing: 0.5px;
     }
 
     /* FAQ Section */
     .faq {
-      padding: 5rem 5%; /* More vertical padding */
+      padding: 6rem 5%;
       background: #fff;
-      border-top-right-radius: 50px;
-      border-top-left-radius: 50px;
-      box-shadow: 0 -8px 25px rgba(0,0,0,0.05);
+      border-top-right-radius: 60px;
+      border-top-left-radius: 60px;
+      box-shadow: 0 -10px 30px rgba(0,0,0,0.08);
       max-width: 1000px;
       margin: 0 auto;
     }
 
     .faq h2 {
-      font-size: 2.8rem;
-      margin-bottom: 2.5rem;
+      font-size: 3.5rem;
+      margin-bottom: 3.5rem;
       text-align: center;
       color: #1a1a1a;
       font-weight: 700;
     }
 
     .faq-item {
-      margin-bottom: 1.5rem; /* More space between items */
-      background: #f9f9f9;
-      border-radius: 10px;
-      padding: 1.5rem 2rem;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      margin-bottom: 1.8rem; /* More space between items */
+      background: #f8fbfd; /* Match body background */
+      border-radius: 15px; /* More rounded */
+      padding: 1.8rem 2.5rem; /* More padding */
+      box-shadow: 0 3px 15px rgba(0,0,0,0.06); /* Softer shadow */
       transition: background 0.3s ease;
     }
 
     .faq-item:hover {
-      background: #f0f0f0;
+      background: #eff5fc; /* Lighter hover background */
     }
 
     .faq-item summary {
       font-weight: 600;
       cursor: pointer;
-      font-size: 1.1rem;
+      font-size: 1.2rem; /* Larger text */
       color: #333;
-      list-style: none; /* Hide default arrow */
+      list-style: none;
       position: relative;
-      padding-right: 30px; /* Space for custom arrow */
+      padding-right: 40px; /* More space for custom arrow */
+      outline: none; /* Remove outline on click */
     }
 
-    .faq-item summary::marker {
-      display: none; /* Hide default marker */
+    .faq-item summary::-webkit-details-marker {
+        display: none;
     }
 
     .faq-item summary::after {
-      content: '+';
+      content: '\2b'; /* Plus sign Unicode */
       position: absolute;
       right: 0;
       top: 50%;
       transform: translateY(-50%);
-      font-size: 1.5rem;
+      font-size: 1.8rem; /* Larger icon */
       transition: transform 0.2s ease;
       color: #007BFF;
+      font-family: 'Font Awesome 5 Free'; /* Ensure Font Awesome is used */
+      font-weight: 900; /* For solid icon */
     }
 
     .faq-item[open] summary::after {
-      content: '-';
-      transform: translateY(-50%) rotate(180deg);
+      content: '\2212'; /* Minus sign Unicode */
+      transform: translateY(-50%) rotate(0deg); /* No rotation needed for minus */
     }
 
     .faq-item p {
-      margin-top: 1rem;
-      font-size: 1rem;
+      margin-top: 1.2rem;
+      font-size: 1.05rem; /* Slightly larger paragraph */
       color: #555;
-      padding-left: 10px; /* Indent paragraph */
+      padding-left: 15px; /* More indent */
     }
 
     /* Footer */
     footer {
-      padding: 2.5rem; /* More padding */
-      background: #e9ecef; /* Lighter footer background */
+      padding: 3rem; /* More padding */
+      background: #e9ecef;
       text-align: center;
-      font-size: 0.95rem;
+      font-size: 1rem; /* Slightly larger */
       color: #666;
       border-top: 1px solid #ddd;
     }
@@ -355,8 +404,8 @@
     footer a {
       color: #007BFF;
       text-decoration: none;
-      margin: 0 0.8rem; /* More space */
-      transition: color 0.3s ease;
+      margin: 0 1rem; /* More space */
+      transition: color 0.3s ease, text-decoration 0.3s ease;
     }
 
     footer a:hover {
@@ -367,68 +416,96 @@
     /* Responsive Design */
     @media (max-width: 992px) {
       h1 {
-        font-size: 2.8rem;
+        font-size: 3rem;
       }
-      .container p {
+      .tagline {
+        font-size: 1.2rem;
+      }
+      .download-btn {
+        padding: 1rem 2.5rem;
         font-size: 1.1rem;
       }
       .hero-imgs img {
-        width: 200px;
+        width: 250px;
+      }
+      .features h2, .faq h2 {
+        font-size: 3rem;
       }
       .feature-grid {
-        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2.5rem;
+      }
+      .counter h3 {
+        font-size: 3.2rem;
+      }
+      .counter p {
+        font-size: 1rem;
       }
     }
 
     @media (max-width: 768px) {
       .nav-links {
-        display: none; /* Hide nav links for mobile */
+        display: none;
       }
       nav {
-        justify-content: center; /* Center logo when links are hidden */
+        justify-content: center;
       }
       h1 {
-        font-size: 2.2rem;
+        font-size: 2.5rem;
       }
-      .container p {
-        font-size: 1rem;
+      .tagline {
+        font-size: 1.1rem;
       }
       .download-btn {
-        padding: 1rem 2rem;
+        padding: 0.9rem 2rem;
         font-size: 1rem;
       }
       .hero-imgs {
         flex-direction: column;
         align-items: center;
-        gap: 1.5rem;
+        gap: 2rem;
       }
       .hero-imgs img {
-        width: 80%; /* Make images take more width */
-        max-width: 300px;
+        width: 90%;
+        max-width: 350px;
       }
       .features h2, .faq h2 {
-        font-size: 2.2rem;
+        font-size: 2.5rem;
+      }
+      .feature i {
+        font-size: 3rem;
+      }
+      .feature h3 {
+        font-size: 1.4rem;
       }
       .counter {
+        width: 48%;
         min-width: unset;
-        width: 45%; /* Two counters per row */
       }
       .counters {
-        justify-content: center;
         gap: 1.5rem;
+      }
+      .faq-item summary {
+        font-size: 1.1rem;
+      }
+      .faq-item summary::after {
+        font-size: 1.5rem;
       }
     }
 
     @media (max-width: 480px) {
       .container, .features, .faq, footer {
-        padding-left: 3%;
-        padding-right: 3%;
+        padding-left: 4%;
+        padding-right: 4%;
       }
       h1 {
-        font-size: 1.8rem;
+        font-size: 2rem;
+      }
+      .tagline {
+        font-size: 0.95rem;
       }
       .download-btn {
-        width: 90%;
+        width: 95%;
         max-width: 300px;
       }
       .counters {
@@ -436,7 +513,7 @@
         align-items: center;
       }
       .counter {
-        width: 90%;
+        width: 95%;
         max-width: 300px;
       }
     }
@@ -444,8 +521,13 @@
 </head>
 <body>
 
+  <a href="#main-content" class="skip-link">Skip to Main Content</a>
+
   <nav>
-    <img src="https://i.ibb.co/C07kLpW/delight-developer-logo.png" alt="Delight Developer Logo" class="logo" />
+    <a href="#" class="logo" aria-label="Delight Developer Home">
+      <img src="https://i.ibb.co/C07kLpW/delight-developer-logo.png" alt="Delight Developer Logo" />
+      Delight Developer
+    </a>
     <div class="nav-links">
       <a href="#home">Home</a>
       <a href="#features">Features</a>
@@ -454,95 +536,96 @@
     </div>
   </nav>
 
-  <section class="container" id="home">
-    <h1>Empowering Developers with Delight</h1>
-    <p>A powerful mobile toolkit designed to simplify your dev workflow, boost productivity, and help you build better software — faster.</p>
+  <main id="main-content">
+    <section class="container" id="home">
+      <h1>Empowering Developers with Delight</h1>
+      <p class="tagline">A powerful mobile toolkit designed to simplify your dev workflow, boost productivity, and help you build better software — faster.</p>
 
-    <button class="download-btn" onclick="confirmDownload()">
-      <img src="https://img.icons8.com/ios-filled/24/FFFFFF/download--v1.png" alt="Download Icon" style="filter: invert(1);">
-      Download APK
-    </button>
+      <button class="download-btn" onclick="confirmDownload()">
+        <i class="fas fa-download"></i> Download APK
+      </button>
 
-    <div class="progress-container" id="progress-container">
-      <div class="progress-bar-bg">
-        <div id="progress-bar" class="progress-bar-fill">0%</div>
+      <div class="progress-container" id="progress-container">
+        <div class="progress-bar-bg">
+          <div id="progress-bar" class="progress-bar-fill">0%</div>
+        </div>
       </div>
-    </div>
 
-    <div class="hero-imgs">
-      <img src="https://i.ibb.co/sK08kXQ/app-screenshot-1.jpg" alt="Delight Developer App Screenshot 1">
-      <img src="https://i.ibb.co/yY1h29b/app-screenshot-2.jpg" alt="Delight Developer App Screenshot 2">
-    </div>
-  </section>
+      <div class="hero-imgs">
+        <img src="https://i.ibb.co/sK08kXQ/app-screenshot-1.jpg" alt="Delight Developer App Screenshot: Code Editor Interface">
+        <img src="https://i.ibb.co/yY1h29b/app-screenshot-2.jpg" alt="Delight Developer App Screenshot: Project Dashboard">
+      </div>
+    </section>
 
-  <section class="features" id="features">
-    <h2>Key Features</h2>
-    <div class="feature-grid">
-      <div class="feature">
-        <img src="https://img.icons8.com/ios-filled/60/terminal.png" alt="Terminal Icon"/>
-        <h3>Smart Code Editor</h3>
-        <p>Write, preview, and debug code directly on your phone with intelligent suggestions.</p>
+    <section class="features" id="features">
+      <h2>Key Features</h2>
+      <div class="feature-grid">
+        <div class="feature">
+          <i class="fas fa-terminal"></i>
+          <h3>Smart Code Editor</h3>
+          <p>Write, preview, and debug code directly on your phone with intelligent suggestions and syntax highlighting.</p>
+        </div>
+        <div class="feature">
+          <i class="fab fa-git-alt"></i>
+          <h3>Seamless Git Integration</h3>
+          <p>Commit, push, pull & merge your projects effortlessly—manage your version control right from your mobile device.</p>
+        </div>
+        <div class="feature">
+          <i class="fas fa-headset"></i>
+          <h3>Instant Live Support</h3>
+          <p>Get immediate assistance from our dedicated dev team and connect with a vibrant, helpful community.</p>
+        </div>
+        <div class="feature">
+          <i class="fas fa-chart-line"></i>
+          <h3>Comprehensive Analytics</h3>
+          <p>Track app usage, performance, and personal productivity metrics in real-time to optimize your workflow.</p>
+        </div>
       </div>
-      <div class="feature">
-        <img src="https://img.icons8.com/ios-filled/60/git.png" alt="Git Icon"/>
-        <h3>Seamless Git Integration</h3>
-        <p>Commit, push, pull & merge your projects effortlessly—all from your mobile device.</p>
-      </div>
-      <div class="feature">
-        <img src="https://img.icons8.com/ios-filled/60/online-support.png" alt="Support Icon"/>
-        <h3>Instant Live Support</h3>
-        <p>Get immediate assistance from our dedicated dev team & a vibrant community.</p>
-      </div>
-      <div class="feature">
-        <img src="https://img.icons8.com/ios-filled/60/analytics.png" alt="Analytics Icon"/>
-        <h3>Comprehensive Analytics</h3>
-        <p>Track app usage, performance, and personal productivity metrics in real-time.</p>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="counters">
-    <div class="counter">
-      <h3 id="users">10K+</h3>
-      <p>Developers Empowered</p>
-    </div>
-    <div class="counter">
-      <h3 id="downloads">25K+</h3>
-      <p>Total Downloads</p>
-    </div>
-    <div class="counter">
-      <h3>99.9%</h3>
-      <p>Guaranteed Uptime</p>
-    </div>
-  </section>
+    <section class="counters">
+      <div class="counter">
+        <h3 id="users">10K+</h3>
+        <p>Developers Empowered</p>
+      </div>
+      <div class="counter">
+        <h3 id="downloads">25K+</h3>
+        <p>Total Downloads</p>
+      </div>
+      <div class="counter">
+        <h3>99.9%</h3>
+        <p>Guaranteed Uptime</p>
+      </div>
+    </section>
 
-  <section class="faq" id="faq">
-    <h2>Frequently Asked Questions</h2>
-    <div class="faq-item">
-      <details>
-        <summary>Is the Delight Developer App free to use?</summary>
-        <p>Yes! You can use most core features for free. We're excited to launch premium plans with advanced functionalities soon.</p>
-      </details>
-    </div>
-    <div class="faq-item">
-      <details>
-        <summary>Does it support popular frameworks like Flutter or React Native?</summary>
-        <p>Absolutely. Delight Developer is built to support a wide range of mobile development frameworks, including Flutter, React Native, and native apps, allowing for easy preview and management.</p>
-      </details>
-    </div>
-    <div class="faq-item">
-      <details>
-        <summary>Where is my project data stored and how secure is it?</summary>
-        <p>All your data is securely encrypted and stored on robust Firebase infrastructure, ensuring the highest standards of data privacy and security.</p>
-      </details>
-    </div>
-    <div class="faq-item">
-      <details>
-        <summary>What kind of devices are supported by the app?</summary>
-        <p>Delight Developer is optimized for a wide range of Android devices. We are continuously working to expand support and ensure compatibility across various smartphones and tablets.</p>
-      </details>
-    </div>
-  </section>
+    <section class="faq" id="faq">
+      <h2>Frequently Asked Questions</h2>
+      <div class="faq-item">
+        <details>
+          <summary>Is the Delight Developer App free to use?</summary>
+          <p>Yes! You can use most core features for free. We're excited to launch premium plans with advanced functionalities soon, offering even more powerful tools for your development needs.</p>
+        </details>
+      </div>
+      <div class="faq-item">
+        <details>
+          <summary>Does it support popular frameworks like Flutter or React Native?</summary>
+          <p>Absolutely. Delight Developer is built to support a wide range of mobile development frameworks, including Flutter, React Native, and native apps, allowing for easy preview and comprehensive management directly from your device.</p>
+        </details>
+      </div>
+      <div class="faq-item">
+        <details>
+          <summary>Where is my project data stored and how secure is it?</summary>
+          <p>All your data is securely encrypted and stored on robust Firebase infrastructure, ensuring the highest standards of data privacy and security. Your projects are safe with us.</p>
+        </details>
+      </div>
+      <div class="faq-item">
+        <details>
+          <summary>What kind of devices are supported by the app?</summary>
+          <p>Delight Developer is optimized for a wide range of Android devices, ensuring a smooth experience across various smartphones and tablets. We are continuously working to expand support and ensure compatibility with the latest hardware.</p>
+        </details>
+      </div>
+    </section>
+  </main>
 
   <footer id="contact">
     <p>© 2025 Delight Developer | <a href="mailto:support@delightdeveloper.com">Contact Support</a> |
@@ -568,23 +651,21 @@
         if (progress >= 100) {
           clearInterval(interval);
           progressBar.textContent = "✅ Download starting...";
-          // Wait a moment before starting the download
           setTimeout(() => {
             window.location.href = downloadUrl;
-            // Optionally hide the progress bar after download initiates
             setTimeout(() => {
                 progressContainer.style.display = "none";
                 progressBar.style.width = "0%";
                 progressBar.textContent = "0%";
-            }, 2000); // Hide after 2 seconds
+            }, 2000);
           }, 500);
         } else {
-          progress += Math.floor(Math.random() * 8) + 4; // Simulate variable speed, slightly slower for effect
+          progress += Math.floor(Math.random() * 8) + 4;
           if (progress > 100) progress = 100;
           progressBar.style.width = progress + "%";
           progressBar.textContent = progress + "%";
         }
-      }, 150); // update every 150ms for a bit faster animation
+      }, 150);
     }
   </script>
 
