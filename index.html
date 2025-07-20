@@ -4,9 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Delight Developer App</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-  <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-6EHHNTQQ03"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6EHHNTQQ03"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
@@ -15,6 +14,7 @@
   gtag('config', 'G-6EHHNTQQ03');
 </script>
   <style>
+    /* General Styles */
     * {
       box-sizing: border-box;
     }
@@ -22,205 +22,422 @@
       font-family: 'Poppins', sans-serif;
       margin: 0;
       padding: 0;
-      background: #ffffff;
+      background: #f4f7fa; /* Lighter, more modern background */
       color: #333;
       scroll-behavior: smooth;
+      line-height: 1.6;
     }
 
+    /* Navigation Bar */
     nav {
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: 1rem 5%;
-      background: white;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      background: linear-gradient_to_right_#ffffff,_#f9f9f9); /* Subtle gradient */
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08); /* Stronger, softer shadow */
       position: sticky;
       top: 0;
       z-index: 1000;
+      border-bottom: 1px solid #eee;
     }
 
     .logo {
-      height: 40px;
+      height: 45px; /* Slightly larger logo */
     }
 
     .nav-links {
       display: flex;
-      gap: 2rem;
+      gap: 2.5rem; /* Increased gap */
     }
 
     .nav-links a {
       text-decoration: none;
-      color: #333;
-      font-weight: 500;
-      transition: color 0.3s;
+      color: #444; /* Darker, more refined link color */
+      font-weight: 600; /* Bolder links */
+      transition: color 0.3s ease, transform 0.2s ease;
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      width: 0%;
+      height: 2px;
+      bottom: -5px;
+      left: 0;
+      background-color: #007BFF;
+      transition: width 0.3s ease;
     }
 
     .nav-links a:hover {
       color: #007BFF;
+      transform: translateY(-2px);
     }
 
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    /* Hero Section */
     .container {
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 4rem 5%;
+      padding: 5rem 5% 3rem; /* Adjusted padding */
       text-align: center;
+      background: #ffffff;
+      border-bottom-left-radius: 50px; /* Rounded corners */
+      border-bottom-right-radius: 50px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.05);
     }
 
     h1 {
-      font-size: 2.8rem;
+      font-size: 3.5rem; /* Larger heading */
       color: #1a1a1a;
-      margin-bottom: 1rem;
+      margin-bottom: 1.5rem;
+      font-weight: 700; /* Bolder heading */
+      line-height: 1.2;
     }
 
-    p {
-      font-size: 1.1rem;
-      max-width: 700px;
-      margin-bottom: 2rem;
+    .container p {
+      font-size: 1.25rem; /* Larger paragraph */
+      max-width: 800px;
+      margin-bottom: 3rem;
+      color: #555;
     }
 
     .download-btn {
-      background: #007BFF;
+      background: linear-gradient_to_right_#007BFF,_#0056b3); /* Gradient button */
       color: white;
-      padding: 1rem 2rem;
-      border-radius: 8px;
-      font-size: 1.1rem;
+      padding: 1.2rem 2.8rem; /* Larger button */
+      border-radius: 50px; /* Pill-shaped button */
+      font-size: 1.2rem;
       text-decoration: none;
-      transition: background 0.3s ease;
+      transition: all 0.3s ease;
       border: none;
       cursor: pointer;
+      box-shadow: 0 8px 20px rgba(0, 123, 255, 0.3);
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
 
     .download-btn:hover {
-      background: #0056b3;
+      background: linear-gradient_to_right_#0056b3,_#003d80);
+      transform: translateY(-3px); /* Lift effect on hover */
+      box-shadow: 0 12px 25px rgba(0, 123, 255, 0.4);
     }
 
     .progress-container {
       display: none;
-      margin-top: 20px;
+      margin-top: 30px;
       width: 100%;
-      max-width: 600px;
-    }
-
-    .progress-bar-bg {
-      background: #e0e0e0;
-      border-radius: 10px;
+      max-width: 700px;
+      background: #e9ecef; /* Lighter progress bar background */
+      border-radius: 15px;
       overflow: hidden;
+      box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
     }
 
     .progress-bar-fill {
-      height: 30px;
+      height: 35px; /* Taller progress bar */
       width: 0%;
       background-color: #28a745;
+      background: linear-gradient_to_right_#28a745,_#218838); /* Gradient fill */
       text-align: center;
-      line-height: 30px;
+      line-height: 35px;
       color: white;
       font-weight: bold;
-      transition: width 0.3s;
+      transition: width 0.4s ease-out; /* Smoother transition */
+      border-radius: 15px 0 0 15px; /* Rounded only on the left initially */
     }
 
     .hero-imgs {
       display: flex;
       justify-content: center;
-      gap: 2rem;
-      margin-top: 2rem;
+      gap: 3rem; /* Increased gap */
+      margin-top: 4rem; /* More space below button */
+      flex-wrap: wrap; /* Allows wrapping on smaller screens */
     }
 
     .hero-imgs img {
-      width: 250px;
-      border-radius: 12px;
+      width: 280px; /* Slightly larger images */
+      border-radius: 20px; /* More rounded corners */
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15); /* More prominent shadow */
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
     }
 
+    .hero-imgs img:hover {
+      transform: translateY(-8px) scale(1.03); /* Lift and slight scale on hover */
+      box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+    }
+
+    /* Features Section */
     .features {
       background: #f9f9f9;
-      padding: 4rem 5%;
+      padding: 5rem 5%; /* More vertical padding */
       text-align: center;
+      position: relative;
+      overflow: hidden; /* To contain background elements */
     }
 
     .features h2 {
-      font-size: 2rem;
-      margin-bottom: 2rem;
+      font-size: 2.8rem; /* Larger heading */
+      margin-bottom: 3.5rem; /* More space */
+      color: #1a1a1a;
+      font-weight: 700;
     }
 
     .feature-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 2rem;
-      max-width: 1100px;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Adjusted minmax */
+      gap: 3rem; /* Increased gap */
+      max-width: 1200px; /* Wider grid */
       margin: 0 auto;
     }
 
     .feature {
       background: white;
-      padding: 2rem;
-      border-radius: 10px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-      transition: transform 0.3s;
+      padding: 2.5rem; /* More padding */
+      border-radius: 15px; /* More rounded corners */
+      box-shadow: 0 6px 25px rgba(0,0,0,0.08); /* Softer shadow */
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      border: 1px solid #eee; /* Subtle border */
     }
 
     .feature:hover {
-      transform: translateY(-5px);
+      transform: translateY(-8px);
+      box-shadow: 0 10px 35px rgba(0,0,0,0.12);
+    }
+
+    .feature img {
+      width: 60px; /* Larger icons */
+      height: 60px;
+      margin-bottom: 1rem;
+      filter: drop-shadow(0 3px 6px rgba(0, 123, 255, 0.2)); /* Subtle icon shadow */
     }
 
     .feature h3 {
       margin-top: 1rem;
-      font-size: 1.2rem;
+      font-size: 1.4rem; /* Larger heading */
+      color: #333;
+      font-weight: 600;
     }
 
+    .feature p {
+      font-size: 1rem;
+      color: #666;
+    }
+
+    /* Counters Section */
     .counters {
       display: flex;
       justify-content: space-around;
-      margin: 3rem 0;
+      margin: 5rem 0; /* More vertical space */
       text-align: center;
+      flex-wrap: wrap; /* Allow wrapping */
+      gap: 2rem; /* Gap for wrapped items */
+    }
+
+    .counter {
+      background: #ffffff;
+      padding: 2rem 3rem;
+      border-radius: 15px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+      flex: 1;
+      min-width: 200px;
+      max-width: 300px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .counter:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
     }
 
     .counter h3 {
-      font-size: 2rem;
+      font-size: 3rem; /* Larger numbers */
       color: #007BFF;
+      margin-bottom: 0.5rem;
+      font-weight: 700;
     }
 
+    .counter p {
+      font-size: 1.1rem;
+      color: #555;
+      font-weight: 500;
+    }
+
+    /* FAQ Section */
     .faq {
-      padding: 3rem 5%;
+      padding: 5rem 5%; /* More vertical padding */
       background: #fff;
+      border-top-right-radius: 50px;
+      border-top-left-radius: 50px;
+      box-shadow: 0 -8px 25px rgba(0,0,0,0.05);
+      max-width: 1000px;
+      margin: 0 auto;
     }
 
     .faq h2 {
-      margin-bottom: 1rem;
+      font-size: 2.8rem;
+      margin-bottom: 2.5rem;
+      text-align: center;
+      color: #1a1a1a;
+      font-weight: 700;
     }
 
     .faq-item {
-      margin-bottom: 1rem;
+      margin-bottom: 1.5rem; /* More space between items */
+      background: #f9f9f9;
+      border-radius: 10px;
+      padding: 1.5rem 2rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      transition: background 0.3s ease;
+    }
+
+    .faq-item:hover {
+      background: #f0f0f0;
     }
 
     .faq-item summary {
       font-weight: 600;
       cursor: pointer;
+      font-size: 1.1rem;
+      color: #333;
+      list-style: none; /* Hide default arrow */
+      position: relative;
+      padding-right: 30px; /* Space for custom arrow */
+    }
+
+    .faq-item summary::marker {
+      display: none; /* Hide default marker */
+    }
+
+    .faq-item summary::after {
+      content: '+';
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 1.5rem;
+      transition: transform 0.2s ease;
+      color: #007BFF;
+    }
+
+    .faq-item[open] summary::after {
+      content: '-';
+      transform: translateY(-50%) rotate(180deg);
     }
 
     .faq-item p {
-      margin-top: 0.5rem;
+      margin-top: 1rem;
+      font-size: 1rem;
+      color: #555;
+      padding-left: 10px; /* Indent paragraph */
     }
 
+    /* Footer */
     footer {
-      padding: 2rem;
-      background: #f1f1f1;
+      padding: 2.5rem; /* More padding */
+      background: #e9ecef; /* Lighter footer background */
       text-align: center;
-      font-size: 0.9rem;
+      font-size: 0.95rem;
       color: #666;
+      border-top: 1px solid #ddd;
     }
 
     footer a {
       color: #007BFF;
       text-decoration: none;
-      margin: 0 0.5rem;
+      margin: 0 0.8rem; /* More space */
+      transition: color 0.3s ease;
+    }
+
+    footer a:hover {
+      color: #0056b3;
+      text-decoration: underline;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 992px) {
+      h1 {
+        font-size: 2.8rem;
+      }
+      .container p {
+        font-size: 1.1rem;
+      }
+      .hero-imgs img {
+        width: 200px;
+      }
+      .feature-grid {
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      }
     }
 
     @media (max-width: 768px) {
       .nav-links {
-        display: none;
+        display: none; /* Hide nav links for mobile */
+      }
+      nav {
+        justify-content: center; /* Center logo when links are hidden */
       }
       h1 {
-        font-size: 2rem;
+        font-size: 2.2rem;
+      }
+      .container p {
+        font-size: 1rem;
+      }
+      .download-btn {
+        padding: 1rem 2rem;
+        font-size: 1rem;
+      }
+      .hero-imgs {
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem;
+      }
+      .hero-imgs img {
+        width: 80%; /* Make images take more width */
+        max-width: 300px;
+      }
+      .features h2, .faq h2 {
+        font-size: 2.2rem;
+      }
+      .counter {
+        min-width: unset;
+        width: 45%; /* Two counters per row */
+      }
+      .counters {
+        justify-content: center;
+        gap: 1.5rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .container, .features, .faq, footer {
+        padding-left: 3%;
+        padding-right: 3%;
+      }
+      h1 {
+        font-size: 1.8rem;
+      }
+      .download-btn {
+        width: 90%;
+        max-width: 300px;
+      }
+      .counters {
+        flex-direction: column;
+        align-items: center;
+      }
+      .counter {
+        width: 90%;
+        max-width: 300px;
       }
     }
   </style>
@@ -241,7 +458,10 @@
     <h1>Empowering Developers with Delight</h1>
     <p>A powerful mobile toolkit designed to simplify your dev workflow, boost productivity, and help you build better software — faster.</p>
 
-    <button class="download-btn" onclick="confirmDownload()">📲 Download APK</button>
+    <button class="download-btn" onclick="confirmDownload()">
+      <img src="https://img.icons8.com/ios-filled/24/FFFFFF/download--v1.png" alt="Download Icon" style="filter: invert(1);"> 
+      Download APK
+    </button>
 
     <div class="progress-container" id="progress-container">
       <div class="progress-bar-bg">
@@ -250,8 +470,8 @@
     </div>
 
     <div class="hero-imgs">
-      <img src="developer1.jpg" alt="Dev 1">
-      <img src="developer2.jpg" alt="Dev 2">
+      <img src="https://via.placeholder.com/280x500?text=App+Screenshot+1" alt="App Screenshot 1">
+      <img src="https://via.placeholder.com/280x500?text=App+Screenshot+2" alt="App Screenshot 2">
     </div>
   </section>
 
@@ -259,24 +479,24 @@
     <h2>Key Features</h2>
     <div class="feature-grid">
       <div class="feature">
-        <img src="https://img.icons8.com/ios-filled/50/terminal.png"/>
+        <img src="https://img.icons8.com/ios-filled/60/terminal.png" alt="Terminal Icon"/>
         <h3>Smart Code Editor</h3>
-        <p>Write, preview, and debug code directly on your phone.</p>
+        <p>Write, preview, and debug code directly on your phone with intelligent suggestions.</p>
       </div>
       <div class="feature">
-        <img src="https://img.icons8.com/ios-filled/50/git.png"/>
-        <h3>Git Integration</h3>
-        <p>Commit, push, pull & merge — all from your mobile.</p>
+        <img src="https://img.icons8.com/ios-filled/60/git.png" alt="Git Icon"/>
+        <h3>Seamless Git Integration</h3>
+        <p>Commit, push, pull & merge your projects effortlessly—all from your mobile device.</p>
       </div>
       <div class="feature">
-        <img src="https://img.icons8.com/ios-filled/50/online-support.png"/>
-        <h3>Live Chat Support</h3>
-        <p>Get help instantly from our dev team & community.</p>
+        <img src="https://img.icons8.com/ios-filled/60/online-support.png" alt="Support Icon"/>
+        <h3>Instant Live Support</h3>
+        <p>Get immediate assistance from our dedicated dev team & a vibrant community.</p>
       </div>
       <div class="feature">
-        <img src="https://img.icons8.com/ios-filled/50/analytics.png"/>
-        <h3>Analytics Dashboard</h3>
-        <p>Track usage, performance and productivity metrics.</p>
+        <img src="https://img.icons8.com/ios-filled/60/analytics.png" alt="Analytics Icon"/>
+        <h3>Comprehensive Analytics</h3>
+        <p>Track app usage, performance, and personal productivity metrics in real-time.</p>
       </div>
     </div>
   </section>
@@ -284,15 +504,15 @@
   <section class="counters">
     <div class="counter">
       <h3 id="users">10K+</h3>
-      <p>Developers</p>
+      <p>Developers Empowered</p>
     </div>
     <div class="counter">
       <h3 id="downloads">25K+</h3>
-      <p>Downloads</p>
+      <p>Total Downloads</p>
     </div>
     <div class="counter">
       <h3>99.9%</h3>
-      <p>Uptime</p>
+      <p>Guaranteed Uptime</p>
     </div>
   </section>
 
@@ -300,31 +520,41 @@
     <h2>Frequently Asked Questions</h2>
     <div class="faq-item">
       <details>
-        <summary>Is the Delight Developer App free?</summary>
-        <p>Yes! You can use most features for free. Premium plans coming soon.</p>
+        <summary>Is the Delight Developer App free to use?</summary>
+        <p>Yes! You can use most core features for free. We're excited to launch premium plans with advanced functionalities soon.</p>
       </details>
     </div>
     <div class="faq-item">
       <details>
-        <summary>Does it support Flutter or React Native?</summary>
-        <p>Absolutely. You can preview and manage Flutter, React, and native apps easily.</p>
+        <summary>Does it support popular frameworks like Flutter or React Native?</summary>
+        <p>Absolutely. Delight Developer is built to support a wide range of mobile development frameworks, including Flutter, React Native, and native apps, allowing for easy preview and management.</p>
       </details>
     </div>
     <div class="faq-item">
       <details>
-        <summary>Where is my data stored?</summary>
-        <p>All data is encrypted and securely stored on Firebase infrastructure.</p>
+        <summary>Where is my project data stored and how secure is it?</summary>
+        <p>All your data is securely encrypted and stored on robust Firebase infrastructure, ensuring the highest standards of data privacy and security.</p>
+      </details>
+    </div>
+    <div class="faq-item">
+      <details>
+        <summary>What kind of devices are supported by the app?</summary>
+        <p>Delight Developer is optimized for a wide range of Android devices. We are continuously working to expand support and ensure compatibility across various smartphones and tablets.</p>
       </details>
     </div>
   </section>
 
   <footer id="contact">
     <p>© 2025 Delight Developer | <a href="mailto:support@delightdeveloper.com">Contact Support</a> |
-      <a href="#">Privacy</a> • <a href="#">Terms</a>
+      <a href="#">Privacy Policy</a> • <a href="#">Terms of Service</a>
     </p>
   </footer>
 
   <script>
+    // Placeholder image paths - replace with your actual images!
+    document.querySelector('.hero-imgs img:nth-child(1)').src = 'https://via.placeholder.com/280x500?text=App+Screenshot+1';
+    document.querySelector('.hero-imgs img:nth-child(2)').src = 'https://via.placeholder.com/280x500?text=App+Screenshot+2';
+
     function confirmDownload() {
       const confirmed = confirm("Do you want to download the Delight Developer APK?");
       if (confirmed) startDownload();
@@ -333,7 +563,7 @@
     function startDownload() {
       const progressBar = document.getElementById("progress-bar");
       const progressContainer = document.getElementById("progress-container");
-      const downloadUrl = "https://github.com/Jigar-kar/my-portfolio/releases/download/v2.0/app-debug.zip";
+      const downloadUrl = "https://github.com/Jigar-kar/my-portfolio/releases/download/v2.0/app-debug.zip"; // Your actual download URL
 
       progressContainer.style.display = "block";
       let progress = 0;
@@ -342,18 +572,23 @@
         if (progress >= 100) {
           clearInterval(interval);
           progressBar.textContent = "✅ Download starting...";
-          
           // Wait a moment before starting the download
           setTimeout(() => {
             window.location.href = downloadUrl;
+            // Optionally hide the progress bar after download initiates
+            setTimeout(() => {
+                progressContainer.style.display = "none";
+                progressBar.style.width = "0%";
+                progressBar.textContent = "0%";
+            }, 2000); // Hide after 2 seconds
           }, 500);
         } else {
-          progress += Math.floor(Math.random() * 10) + 5; // Simulate variable speed
+          progress += Math.floor(Math.random() * 8) + 4; // Simulate variable speed, slightly slower for effect
           if (progress > 100) progress = 100;
           progressBar.style.width = progress + "%";
           progressBar.textContent = progress + "%";
         }
-      }, 200); // update every 200ms
+      }, 150); // update every 150ms for a bit faster animation
     }
   </script>
 
