@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Delight Developer App</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #ffffff;
+      color: #333;
+      scroll-behavior: smooth;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 5%;
+      background: white;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .logo {
+      height: 40px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: #007BFF;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 4rem 5%;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 2.8rem;
+      color: #1a1a1a;
+      margin-bottom: 1rem;
+    }
+
+    p {
+      font-size: 1.1rem;
+      max-width: 700px;
+      margin-bottom: 2rem;
+    }
+
+    .download-btn {
+      background: #007BFF;
+      color: white;
+      padding: 1rem 2rem;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      text-decoration: none;
+      transition: background 0.3s ease;
+    }
+
+    .download-btn:hover {
+      background: #0056b3;
+    }
+
+    .features {
+      background: #f9f9f9;
+      padding: 4rem 5%;
+      text-align: center;
+    }
+
+    .features h2 {
+      font-size: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .feature {
+      background: white;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+      transition: transform 0.3s;
+    }
+
+    .feature:hover {
+      transform: translateY(-5px);
+    }
+
+    .feature h3 {
+      margin-top: 1rem;
+      font-size: 1.2rem;
+    }
+
+    .hero-imgs {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .hero-imgs img {
+      width: 250px;
+      border-radius: 12px;
+    }
+
+    .counters {
+      display: flex;
+      justify-content: space-around;
+      margin: 3rem 0;
+      text-align: center;
+    }
+
+    .counter h3 {
+      font-size: 2rem;
+      color: #007BFF;
+    }
+
+    .faq {
+      padding: 3rem 5%;
+      background: #fff;
+    }
+
+    .faq h2 {
+      margin-bottom: 1rem;
+    }
+
+    .faq-item {
+      margin-bottom: 1rem;
+    }
+
+    .faq-item summary {
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .faq-item p {
+      margin-top: 0.5rem;
+    }
+
+    footer {
+      padding: 2rem;
+      background: #f1f1f1;
+      text-align: center;
+      font-size: 0.9rem;
+      color: #666;
+    }
+
+    footer a {
+      color: #007BFF;
+      text-decoration: none;
+      margin: 0 0.5rem;
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+      h1 {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <img src="delight-logo.png" alt="Delight Developer Logo" class="logo" />
+    <div class="nav-links">
+      <a href="#home">Home</a>
+      <a href="#features">Features</a>
+      <a href="#faq">FAQ</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+
+  <section class="container" id="home">
+    <h1>Empowering Developers with Delight</h1>
+    <p>A powerful mobile toolkit designed to simplify your dev workflow, boost productivity, and help you build better software — faster.</p>
+    <a href="https://yourdomain.com/delight_developer.apk" class="download-btn" download>📲 Download APK</a>
+    
+    <div class="hero-imgs">
+      <img src="developer1.jpg" alt="Dev 1">
+      <img src="developer2.jpg" alt="Dev 2">
+    </div>
+  </section>
+
+  <section class="features" id="features">
+    <h2>Key Features</h2>
+    <div class="feature-grid">
+      <div class="feature">
+        <img src="https://img.icons8.com/ios-filled/50/terminal.png"/>
+        <h3>Smart Code Editor</h3>
+        <p>Write, preview, and debug code directly on your phone.</p>
+      </div>
+      <div class="feature">
+        <img src="https://img.icons8.com/ios-filled/50/git.png"/>
+        <h3>Git Integration</h3>
+        <p>Commit, push, pull & merge — all from your mobile.</p>
+      </div>
+      <div class="feature">
+        <img src="https://img.icons8.com/ios-filled/50/online-support.png"/>
+        <h3>Live Chat Support</h3>
+        <p>Get help instantly from our dev team & community.</p>
+      </div>
+      <div class="feature">
+        <img src="https://img.icons8.com/ios-filled/50/analytics.png"/>
+        <h3>Analytics Dashboard</h3>
+        <p>Track usage, performance and productivity metrics.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="counters">
+    <div class="counter">
+      <h3 id="users">10K+</h3>
+      <p>Developers</p>
+    </div>
+    <div class="counter">
+      <h3 id="downloads">25K+</h3>
+      <p>Downloads</p>
+    </div>
+    <div class="counter">
+      <h3>99.9%</h3>
+      <p>Uptime</p>
+    </div>
+  </section>
+
+  <section class="faq" id="faq">
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq-item">
+      <details>
+        <summary>Is the Delight Developer App free?</summary>
+        <p>Yes! You can use most features for free. Premium plans coming soon.</p>
+      </details>
+    </div>
+    <div class="faq-item">
+      <details>
+        <summary>Does it support Flutter or React Native?</summary>
+        <p>Absolutely. You can preview and manage Flutter, React, and native apps easily.</p>
+      </details>
+    </div>
+    <div class="faq-item">
+      <details>
+        <summary>Where is my data stored?</summary>
+        <p>All data is encrypted and securely stored on Firebase infrastructure.</p>
+      </details>
+    </div>
+  </section>
+
+  <footer id="contact">
+    <p>© 2025 Delight Developer | <a href="mailto:support@delightdeveloper.com">Contact Support</a> |
+      <a href="#">Privacy</a> • <a href="#">Terms</a>
+    </p>
+  </footer>
+
+</body>
+</html>
