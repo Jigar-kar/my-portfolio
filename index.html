@@ -3,13 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Delight Developer App - AI Powered</title>
+  <title>Delight Developer App - AI Code Preview</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <style>
     :root {
       --bg-dark: #161625;
       --card-dark: #1e1e33;
+      --card-light: #2c2c44;
       --text-light: #e0e0f0;
       --text-muted: #a0a0c0;
       --primary-blue: #007BFF;
@@ -26,35 +27,32 @@
     body { font-family: var(--font-family); background: var(--bg-dark); color: var(--text-light); line-height: 1.6; overflow-x: hidden; }
     section { padding: 5rem 5%; }
     h2 { font-size: clamp(2.2rem, 5vw, 3rem); margin-bottom: 3rem; text-align: center; font-weight: 800; }
-    .card { background: var(--card-dark); border-radius: 15px; box-shadow: 0 8px 30px var(--shadow-color); transition: transform var(--transition-fast), box-shadow var(--transition-fast); border: 1px solid var(--border-color); }
-    .card:hover { transform: translateY(-8px); box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4); }
     nav { display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 5%; position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; transition: background-color 0.4s ease, box-shadow 0.4s ease, padding 0.4s ease; }
     nav.scrolled { background-color: rgba(30, 30, 51, 0.85); backdrop-filter: blur(10px); box-shadow: 0 4px 20px var(--shadow-color); padding: 0.8rem 5%; }
     .logo { display: flex; align-items: center; gap: 12px; font-size: 1.5rem; font-weight: 700; color: var(--primary-blue); text-decoration: none; }
     .logo img { height: 40px; }
     .nav-links { display: flex; gap: 2.5rem; }
     .nav-links a { text-decoration: none; color: var(--text-muted); font-weight: 500; transition: color 0.3s ease; }
-    .nav-links a:hover, .nav-links a.active { color: var(--text-light); }
-    .hero-container { display: flex; flex-direction: column; align-items: center; padding-top: 8rem; text-align: center; min-height: 100vh; justify-content: center; }
+    .nav-links a:hover { color: var(--text-light); }
+    .hero-container { display: flex; flex-direction: column; align-items: center; padding-top: 8rem; text-align: center; min-height: 90vh; justify-content: center; }
     h1 { font-size: clamp(2.5rem, 6vw, 3.8rem); margin-bottom: 1rem; font-weight: 800; line-height: 1.2; max-width: 850px; }
     .tagline { font-size: clamp(1rem, 2.5vw, 1.25rem); max-width: 650px; margin-bottom: 2.5rem; color: var(--text-muted); }
-    .download-btn { background: linear-gradient(45deg, var(--primary-gradient-start), var(--primary-gradient-end)); color: white; padding: 1rem 2.5rem; border-radius: 50px; font-size: 1.1rem; text-decoration: none; transition: all var(--transition-fast); border: none; cursor: pointer; box-shadow: 0 8px 25px rgba(0, 123, 255, 0.3); display: inline-flex; align-items: center; gap: 10px; font-weight: 600; }
-    .download-btn:hover { transform: translateY(-5px) scale(1.05); box-shadow: 0 15px 35px rgba(0, 123, 255, 0.4); }
     
     /* --- AI Feature Section --- */
     #ai-feature { text-align: center; }
     .ai-feature-container { display: flex; flex-direction: column; align-items: center; gap: 2rem; }
-    .ai-demo-card { background: var(--card-dark); border: 1px solid var(--border-color); border-radius: 15px; padding: 2rem; max-width: 700px; width: 100%; box-shadow: 0 0 40px var(--ai-glow-color); }
+    .ai-demo-card { background: var(--card-dark); border: 1px solid var(--border-color); border-radius: 15px; padding: 2rem; max-width: 900px; width: 100%; box-shadow: 0 0 50px var(--ai-glow-color); }
     .prompt-area { display: flex; gap: 1rem; margin-bottom: 1.5rem; }
-    .prompt-input { flex-grow: 1; background: var(--bg-dark); border: 1px solid var(--border-color); border-radius: 8px; padding: 0.8rem 1rem; color: var(--text-light); font-size: 1rem; transition: border-color 0.3s, box-shadow 0.3s; }
-    .prompt-input:focus { outline: none; border-color: var(--primary-blue); box-shadow: 0 0 10px rgba(0, 123, 255, 0.3); }
-    .generate-btn { background: var(--primary-blue); color: white; border: none; border-radius: 8px; padding: 0 1.5rem; font-weight: 600; cursor: pointer; transition: background-color 0.3s; display: flex; align-items: center; gap: 8px; }
-    .generate-btn:hover { background: #0056b3; }
-    .code-output-wrapper { background: #0d1117; border-radius: 8px; padding: 1.5rem; min-height: 200px; text-align: left; font-family: 'Courier New', Courier, monospace; white-space: pre-wrap; transition: background-color 0.4s; }
-    .code-output-wrapper.loading { display: flex; justify-content: center; align-items: center; color: var(--text-muted); font-style: italic; }
-    .code-output-wrapper .c1 { color: #c98bcf; } .code-output-wrapper .c2 { color: #82aaff; } .code-output-wrapper .c3 { color: #f78c6c; } .code-output-wrapper .c4 { color: #c3e88d; } .code-output-wrapper .c5 { color: #89ddff; } .code-output-wrapper .c6 { color: #637777; }
+    .prompt-input { flex-grow: 1; background: var(--bg-dark); border: 1px solid var(--border-color); border-radius: 8px; padding: 0.8rem 1rem; color: var(--text-light); font-size: 1rem; }
+    .generate-btn { background: var(--primary-blue); color: white; border: none; border-radius: 8px; padding: 0 1.5rem; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 8px; }
+    .output-container { display: flex; flex-wrap: wrap; gap: 1rem; }
+    .code-output-wrapper, .live-preview-wrapper { flex: 1; min-width: 300px; border-radius: 8px; padding: 1.5rem; min-height: 250px; transition: background-color 0.4s; }
+    .code-output-wrapper { background: #0d1117; text-align: left; font-family: 'Courier New', Courier, monospace; white-space: pre-wrap; color: var(--text-muted); }
+    .live-preview-wrapper { background: var(--card-light); display: flex; justify-content: center; align-items: center; font-family: var(--font-family); color: var(--text-muted); }
+    .loading-text { font-style: italic; }
+    /* Syntax Highlighting Colors */
+    .c1 { color: #c98bcf; } .c2 { color: #82aaff; } .c3 { color: #f78c6c; } .c4 { color: #c3e88d; } .c5 { color: #89ddff; } .c6 { color: #637777; }
 
-    /* --- Other Sections --- */
     footer { padding: 3rem 5%; text-align: center; color: var(--text-muted); border-top: 1px solid var(--border-color); margin-top: 5rem; }
     .animate-on-scroll { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
     .animate-on-scroll.visible { opacity: 1; transform: translateY(0); }
@@ -62,12 +60,9 @@
 </head>
 <body>
   <nav id="navbar">
-    <a href="#" class="logo">
-      <img src="https://i.ibb.co/C07kLpW/delight-developer-logo.png" alt="Logo" />
-      Delight Developer
-    </a>
+    <a href="#" class="logo"><img src="https://i.ibb.co/C07kLpW/delight-developer-logo.png" alt="Logo"/> Delight Developer</a>
     <div class="nav-links">
-      <a href="#home" class="active">Home</a>
+      <a href="#home">Home</a>
       <a href="#ai-feature">AI Assistant</a>
       <a href="#contact">Contact</a>
     </div>
@@ -75,27 +70,23 @@
 
   <main>
     <section class="hero-container" id="home">
-      <h1 class="animate-on-scroll">Build Better Software, Faster. Now with AI.</h1>
-      <p class="tagline animate-on-scroll" style="transition-delay: 0.1s;">The ultimate mobile toolkit for developers on the go. Code, manage, and deploy with the power of an integrated AI assistant.</p>
-      <button class="download-btn animate-on-scroll" style="transition-delay: 0.2s;">
-        <i class="fas fa-download"></i> Download APK
-      </button>
+      <h1 class="animate-on-scroll">Build, Test, and Preview with AI.</h1>
+      <p class="tagline animate-on-scroll" style="transition-delay: 0.1s;">The ultimate mobile toolkit for developers. Generate code with our AI assistant and see a live preview instantly.</p>
     </section>
 
     <section id="ai-feature">
       <div class="ai-feature-container">
-        <h2 class="animate-on-scroll">Meet Your AI Code Assistant ✨</h2>
-        <p class="tagline animate-on-scroll" style="transition-delay: 0.1s; margin-top: -2rem;">Stuck on a problem? Need boilerplate code? Just ask our AI. Generate components, functions, and queries in seconds.</p>
+        <h2 class="animate-on-scroll">Your AI Co-pilot for Code</h2>
+        <p class="tagline animate-on-scroll" style="transition-delay: 0.1s; margin-top: -2rem;">Describe the UI you want. Our AI will generate the code and a live preview in real-time.</p>
         
         <div class="ai-demo-card animate-on-scroll" style="transition-delay: 0.2s;">
           <div class="prompt-area">
-            <input type="text" id="prompt-input" class="prompt-input" placeholder="e.g., 'create a login button in react'">
-            <button id="generate-btn" class="generate-btn">
-              <i class="fas fa-magic"></i> Generate
-            </button>
+            <input type="text" id="prompt-input" class="prompt-input" placeholder="e.g., 'a blue login button' or 'profile card'">
+            <button id="generate-btn" class="generate-btn"><i class="fas fa-magic"></i> Generate</button>
           </div>
-          <div id="code-output" class="code-output-wrapper">
-            Your generated code will appear here...
+          <div class="output-container">
+            <div id="code-output" class="code-output-wrapper">Your generated code will appear here...</div>
+            <div id="live-preview" class="live-preview-wrapper">Your live preview will appear here...</div>
           </div>
         </div>
       </div>
@@ -122,23 +113,35 @@
       }, { threshold: 0.1 });
       document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
 
-      // --- AI SIMULATION SCRIPT ---
+      // --- AI SIMULATION WITH LIVE PREVIEW ---
       const generateBtn = document.getElementById('generate-btn');
       const promptInput = document.getElementById('prompt-input');
       const codeOutput = document.getElementById('code-output');
+      const livePreview = document.getElementById('live-preview');
 
-      // This is our "AI Brain" - a simple dictionary of prompts and responses
       const aiResponses = {
-        'login button': `<span class="c1">import</span> React <span class="c1">from</span> <span class="c4">'react'</span>;\n\n<span class="c1">const</span> <span class="c2">LoginButton</span> = () => {\n  <span class="c1">return</span> (\n    &lt;<span class="c3">button</span> <span class="c5">onClick</span>={() => <span class="c2">alert</span>(<span class="c4">'Logged In!'</span>)}&gt;\n      Login\n    &lt;/<span class="c3">button</span>&gt;\n  );\n};`,
-        'css animation': `<span class="c6">/* Simple Fade-in Animation */</span>\n\n<span class="c3">@keyframes</span> fadeIn {\n  <span class="c1">from</span> { <span class="c5">opacity</span>: <span class="c4">0</span>; }\n  <span class="c1">to</span> { <span class="c5">opacity</span>: <span class="c4">1</span>; }\n}\n\n<span class="c2">.animated-element</span> {\n  <span class="c5">animation</span>: fadeIn <span class="c4">1.5s</span> ease-in-out;\n}`,
-        'fetch data': `<span class="c1">async function</span> <span class="c2">fetchUserData</span>() {\n  <span class="c1">const</span> url = <span class="c4">'https://api.example.com/user/1'</span>;\n  <span class="c1">try</span> {\n    <span class="c1">const</span> response = <span class="c1">await</span> <span class="c2">fetch</span>(url);\n    <span class="c1">const</span> data = <span class="c1">await</span> response.<span class="c2">json</span>();\n    <span class="c2">console</span>.<span class="c2">log</span>(data);\n  } <span class="c1">catch</span> (error) {\n    <span class="c2">console</span>.<span class="c2">error</span>(<span class="c4">'Fetch failed:'</span>, error);\n  }\n}`
+        'button': {
+          code: `&lt;<span class="c3">button</span> <span class="c5">style</span>=<span class="c4">"background:#007BFF; color:white; border:none; padding:10px 20px; border-radius:5px; cursor:pointer;"</span>&gt;\n  Login\n&lt;/<span class="c3">button</span>&gt;`,
+          preview: `<button style="background:#007BFF; color:white; border:none; padding:10px 20px; border-radius:5px; cursor:pointer;">Login</button>`
+        },
+        'profile card': {
+          code: `&lt;<span class="c3">div</span> <span class="c5">style</span>=<span class="c4">"..."</span>&gt;\n  &lt;<span class="c3">img</span> <span class="c5">src</span>=<span class="c4">"..."</span>&gt;\n  &lt;<span class="c3">h3</span>&gt;Alex Doe&lt;/<span class="c3">h3</span>&gt;\n  &lt;<span class="c3">p</span>&gt;Software Engineer&lt;/<span class="c3">p</span>&gt;\n&lt;/<span class="c3">div</span>&gt;`,
+          preview: `<div style="background-color: #161625; color: #e0e0f0; padding: 20px; border-radius: 10px; text-align: center; width: 200px; font-family: 'Inter', sans-serif;">
+                      <img src="https://i.pravatar.cc/100" style="border-radius: 50%; border: 2px solid #007BFF;">
+                      <h3 style="margin: 10px 0 5px 0;">Alex Doe</h3>
+                      <p style="margin: 0; color: #a0a0c0; font-size: 0.9em;">Software Engineer</p>
+                    </div>`
+        },
+        'default': {
+            code: `<span class="c6">// Sorry, I can't generate that yet.\n// Try 'button' or 'profile card'.</span>`,
+            preview: `<span class="loading-text">No preview available.</span>`
+        }
       };
 
       generateBtn.addEventListener('click', () => {
         const prompt = promptInput.value.toLowerCase();
-        let response = `<span class="c6">// Sorry, I don't have a response for that yet. \n// Try 'login button', 'css animation', or 'fetch data'.</span>`;
+        let response = aiResponses.default;
         
-        // Find a matching response
         for (const key in aiResponses) {
             if (prompt.includes(key)) {
                 response = aiResponses[key];
@@ -147,13 +150,13 @@
         }
         
         // Simulate thinking
-        codeOutput.classList.add('loading');
-        codeOutput.innerHTML = 'Generating...';
+        codeOutput.innerHTML = '<span class="loading-text">Generating code...</span>';
+        livePreview.innerHTML = '<span class="loading-text">Loading preview...</span>';
         
         setTimeout(() => {
-          codeOutput.innerHTML = response;
-          codeOutput.classList.remove('loading');
-        }, 1500); // 1.5 second delay
+          codeOutput.innerHTML = response.code;
+          livePreview.innerHTML = response.preview;
+        }, 1500);
       });
     });
   </script>
