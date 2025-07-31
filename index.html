@@ -1,171 +1,295 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Delight Developer App - LLM-Powered Assistant</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <style>
-    :root {
-      --bg-dark: #161625;
-      --card-dark: #1e1e33;
-      --card-light: #2c2c44;
-      --text-light: #e0e0f0;
-      --text-muted: #a0a0c0;
-      --primary-blue: #007BFF;
-      --ai-glow-color: rgba(106, 27, 178, 0.4);
-      --border-color: rgba(224, 224, 240, 0.1);
-      --font-family: 'Inter', sans-serif;
-    }
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body { font-family: var(--font-family); background: var(--bg-dark); color: var(--text-light); line-height: 1.6; overflow-x: hidden; }
-    section { padding: 5rem 5%; }
-    h2 { font-size: clamp(2.2rem, 5vw, 3rem); margin-bottom: 3rem; text-align: center; font-weight: 800; }
-    nav { display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 5%; position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; transition: background-color 0.4s ease, box-shadow 0.4s ease; }
-    nav.scrolled { background-color: rgba(30, 30, 51, 0.85); backdrop-filter: blur(10px); box-shadow: 0 4px 20px rgba(0,0,0,0.3); }
-    .hero-container { display: flex; flex-direction: column; align-items: center; padding-top: 8rem; text-align: center; min-height: 90vh; justify-content: center; }
-    h1 { font-size: clamp(2.5rem, 6vw, 3.8rem); margin-bottom: 1rem; font-weight: 800; line-height: 1.2; max-width: 850px; }
-    .tagline { font-size: clamp(1rem, 2.5vw, 1.25rem); max-width: 650px; margin-bottom: 2.5rem; color: var(--text-muted); }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Narayan PG and Hostel - Your Home Away From Home</title>
     
-    /* --- AI Feature Section --- */
-    #ai-feature { text-align: center; }
-    .ai-demo-card { background: var(--card-dark); border: 1px solid var(--border-color); border-radius: 15px; padding: 2rem; max-width: 900px; width: 100%; box-shadow: 0 0 50px var(--ai-glow-color); }
-    .prompt-area { display: flex; gap: 1rem; margin-bottom: 1.5rem; }
-    .prompt-input { flex-grow: 1; background: var(--bg-dark); border: 1px solid var(--border-color); border-radius: 8px; padding: 0.8rem 1rem; color: var(--text-light); font-size: 1rem; }
-    .generate-btn { background: var(--primary-blue); color: white; border: none; border-radius: 8px; padding: 0 1.5rem; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 8px; }
-    .output-container { display: flex; flex-wrap: wrap; gap: 1rem; }
-    .code-output-wrapper, .live-preview-wrapper { flex: 1; min-width: 300px; border-radius: 8px; padding: 1.5rem; min-height: 300px; transition: background-color 0.4s; }
-    .code-output-wrapper { background: #0d1117; text-align: left; font-family: 'Courier New', Courier, monospace; white-space: pre-wrap; color: var(--text-muted); }
-    .live-preview-wrapper { background: var(--card-light); display: flex; justify-content: center; align-items: center; font-family: var(--font-family); color: var(--text-muted); }
-    .loading-text, .preview-placeholder { font-style: italic; color: #777; }
-    .blinking-cursor { animation: blink 1s step-end infinite; }
-    @keyframes blink { from, to { color: transparent; } 50% { color: var(--primary-blue); } }
-    /* Syntax Colors */
-    .c-keyword { color: #c98bcf; } .c-function { color: #82aaff; } .c-string { color: #c3e88d; } .c-comment { color: #637777; } .c-tag { color: #f78c6c; } .c-attr { color: #89ddff; }
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-    footer { padding: 3rem 5%; text-align: center; color: var(--text-muted); border-top: 1px solid var(--border-color); margin-top: 5rem; }
-  </style>
+    <style>
+        /* Custom styles */
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        .hero-section {
+            background-image: url('https://images.unsplash.com/photo-1582577364114-c12a51da02c7?q=80&w=2070&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+        }
+        .gallery-img {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .gallery-img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+    </style>
 </head>
-<body>
-  <nav id="navbar">
-    </nav>
+<body class="bg-gray-50 text-gray-800">
 
-  <main>
-    <section class="hero-container" id="home">
-      <h1>The AI Co-pilot for Ambitious Developers</h1>
-      <p class="tagline">Generate, debug, and understand code in any language. Your personal LLM assistant, built right into your workflow.</p>
-    </section>
-
-    <section id="ai-feature">
-        <h2 >Ask, and You Shall Receive Code</h2>
-        <p class="tagline" style="margin-top: -2rem;">From Python scripts to complex SQL queries, describe what you need and watch the magic happen.</p>
-        
-        <div class="ai-demo-card">
-          <div class="prompt-area">
-            <input type="text" id="prompt-input" class="prompt-input" placeholder="e.g., 'python prime number function'">
-            <button id="generate-btn" class="generate-btn"><i class="fas fa-magic"></i> Generate</button>
-          </div>
-          <div class="output-container">
-            <div id="code-output" class="code-output-wrapper">Your AI-generated response will appear here...<span id="cursor" class="blinking-cursor">|</span></div>
-            <div id="live-preview" class="live-preview-wrapper"><span class="preview-placeholder">Preview for web languages will appear here.</span></div>
-          </div>
+    <!-- Header -->
+    <header id="header" class="bg-white shadow-md sticky top-0 z-50 transition-all duration-300">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-indigo-600">Narayan PG</a>
+            <div class="hidden md:flex space-x-8 items-center">
+                <a href="#home" class="text-gray-600 hover:text-indigo-600 transition">Home</a>
+                <a href="#about" class="text-gray-600 hover:text-indigo-600 transition">About</a>
+                <a href="#rooms" class="text-gray-600 hover:text-indigo-600 transition">Rooms</a>
+                <a href="#amenities" class="text-gray-600 hover:text-indigo-600 transition">Amenities</a>
+                <a href="#gallery" class="text-gray-600 hover:text-indigo-600 transition">Gallery</a>
+                <a href="#contact" class="text-gray-600 hover:text-indigo-600 transition">Contact</a>
+            </div>
+            <a href="#contact" class="hidden md:block bg-indigo-600 text-white px-5 py-2 rounded-full hover:bg-indigo-700 transition">Book Now</a>
+            <button id="mobile-menu-button" class="md:hidden">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+        </nav>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white">
+            <a href="#home" class="block text-center py-2 px-4 text-sm text-gray-700 hover:bg-indigo-50">Home</a>
+            <a href="#about" class="block text-center py-2 px-4 text-sm text-gray-700 hover:bg-indigo-50">About</a>
+            <a href="#rooms" class="block text-center py-2 px-4 text-sm text-gray-700 hover:bg-indigo-50">Rooms</a>
+            <a href="#amenities" class="block text-center py-2 px-4 text-sm text-gray-700 hover:bg-indigo-50">Amenities</a>
+            <a href="#gallery" class="block text-center py-2 px-4 text-sm text-gray-700 hover:bg-indigo-50">Gallery</a>
+            <a href="#contact" class="block text-center py-2 px-4 text-sm text-gray-700 hover:bg-indigo-50">Contact</a>
+             <a href="#contact" class="block text-center py-4 px-4 text-sm bg-indigo-600 text-white hover:bg-indigo-700">Book Now</a>
         </div>
-    </section>
-  </main>
+    </header>
 
-  <footer id="contact">
-    <p>© 2025 Delight Developer | All Rights Reserved</p>
-  </footer>
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="hero-section h-[calc(100vh-72px)] flex items-center justify-center text-white">
+            <div class="bg-black bg-opacity-50 p-10 rounded-xl text-center">
+                <h1 class="text-4xl md:text-6xl font-bold mb-4">Your Perfect Stay in the City</h1>
+                <p class="text-lg md:text-xl mb-8">Comfortable, Secure, and Affordable Living for Students & Professionals.</p>
+                <a href="#rooms" class="bg-indigo-600 text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-indigo-700 transition">Explore Rooms</a>
+            </div>
+        </section>
 
-  <script>
-    document.addEventListener("DOMContentLoaded", function() {
-      // --- Navbar Scroll ---
-      window.addEventListener('scroll', () => {
-        document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
-      });
+        <!-- About Us Section -->
+        <section id="about" class="py-20">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800">About Narayan PG & Hostel</h2>
+                    <p class="text-gray-600 mt-4 max-w-2xl mx-auto">Discover a place where comfort meets convenience. We are dedicated to providing a safe, clean, and friendly environment for all our residents.</p>
+                </div>
+                <div class="flex flex-col md:flex-row items-center gap-12">
+                    <div class="md:w-1/2">
+                        <img src="https://images.unsplash.com/photo-1540518614846-7eded433c457?q=80&w=2057&auto=format&fit=crop" alt="Comfortable common area" class="rounded-lg shadow-xl w-full">
+                    </div>
+                    <div class="md:w-1/2">
+                        <h3 class="text-2xl font-semibold mb-4">A Home Away From Home</h3>
+                        <p class="text-gray-600 mb-4">Located in the heart of the city, Narayan PG and Hostel offers easy access to major educational institutions and corporate hubs. Our mission is to provide an affordable living space without compromising on quality or safety.</p>
+                        <p class="text-gray-600">We foster a sense of community, ensuring that your stay is not just comfortable but also memorable. With modern amenities and a dedicated staff, we take care of everything so you can focus on what matters most.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-      // --- AI SIMULATION SCRIPT ---
-      const generateBtn = document.getElementById('generate-btn');
-      const promptInput = document.getElementById('prompt-input');
-      const codeOutput = document.getElementById('code-output');
-      const livePreview = document.getElementById('live-preview');
-      const cursor = document.getElementById('cursor');
+        <!-- Rooms & Pricing Section -->
+        <section id="rooms" class="py-20 bg-gray-100">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800">Our Rooms</h2>
+                    <p class="text-gray-600 mt-4 max-w-2xl mx-auto">Choose from a variety of well-furnished rooms designed for your comfort and privacy.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Room Card 1 -->
+                    <div class="bg-white rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300">
+                        <img src="https://placehold.co/600x400/667eea/ffffff?text=Single+Room" alt="Single Room" class="w-full h-56 object-cover">
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold mb-2">Single Occupancy</h3>
+                            <p class="text-gray-600 mb-4">Perfect for individuals seeking privacy and personal space. Fully furnished with all modern amenities.</p>
+                            <div class="text-2xl font-bold text-indigo-600">₹8,000 <span class="text-sm font-normal text-gray-500">/ month</span></div>
+                        </div>
+                    </div>
+                    <!-- Room Card 2 -->
+                    <div class="bg-white rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300">
+                        <img src="https://placehold.co/600x400/764ba2/ffffff?text=Double+Room" alt="Double Sharing Room" class="w-full h-56 object-cover">
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold mb-2">Double Sharing</h3>
+                            <p class="text-gray-600 mb-4">A cost-effective option for those who enjoy company. Spacious and comfortable for two.</p>
+                            <div class="text-2xl font-bold text-indigo-600">₹5,500 <span class="text-sm font-normal text-gray-500">/ month</span></div>
+                        </div>
+                    </div>
+                    <!-- Room Card 3 -->
+                    <div class="bg-white rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300">
+                        <img src="https://placehold.co/600x400/3b82f6/ffffff?text=Triple+Room" alt="Triple Sharing Room" class="w-full h-56 object-cover">
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold mb-2">Triple Sharing</h3>
+                            <p class="text-gray-600 mb-4">The most budget-friendly choice, ideal for students and friends. Ample space for three.</p>
+                            <div class="text-2xl font-bold text-indigo-600">₹4,000 <span class="text-sm font-normal text-gray-500">/ month</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-      // --- The Upgraded "AI Brain" ---
-      const aiResponses = {
-        'button': {
-          explanation: "Here's a simple HTML button with inline styling:",
-          code: `&lt;<span class="c-tag">button</span> <span class="c-attr">style</span>=<span class="c-string">"..."</span>&gt;Login&lt;/<span class="c-tag">button</span>&gt;`,
-          preview: `<button style="background:#007BFF; color:white; border:none; padding:10px 20px; border-radius:5px; cursor:pointer;">Login</button>`
-        },
-        'python': {
-          explanation: "Sure, here is a Python function to check for prime numbers:",
-          code: `<span class="c-keyword">def</span> <span class="c-function">is_prime</span>(n):\n  <span class="c-comment"># Prime numbers must be greater than 1</span>\n  <span class="c-keyword">if</span> n <= 1:\n    <span class="c-keyword">return</span> <span class="c-keyword">False</span>\n  <span class="c-keyword">for</span> i <span class="c-keyword">in</span> <span class="c-function">range</span>(2, <span class="c-function">int</span>(n**0.5) + 1):\n    <span class="c-keyword">if</span> n % i == 0:\n      <span class="c-keyword">return</span> <span class="c-keyword">False</span>\n  <span class="c-keyword">return</span> <span class="c-keyword">True</span>`,
-          preview: null // No visual preview for Python
-        },
-        'sql': {
-            explanation: "Certainly. Here is a basic SQL query to select users from a table:",
-            code: `<span class="c-keyword">SELECT</span> id, username, email\n<span class="c-keyword">FROM</span> users\n<span class="c-keyword">WHERE</span> registration_date > <span class="c-string">'2025-01-01'</span>;`,
-            preview: null
-        },
-        'default': {
-            explanation: "I can help with that. What language are you thinking of?",
-            code: `<span class="c-comment">// I can generate examples for 'button', 'python', and 'sql'.\n// Give one of those a try!</span>`,
-            preview: null
-        }
-      };
-      
-      let isTyping = false;
-      let typingInterval;
+        <!-- Amenities Section -->
+        <section id="amenities" class="py-20">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800">Facilities & Amenities</h2>
+                    <p class="text-gray-600 mt-4 max-w-2xl mx-auto">We provide all the essential amenities to ensure a hassle-free and comfortable living experience.</p>
+                </div>
+                <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-8 text-center">
+                    <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow">
+                        <i class="fas fa-wifi text-4xl text-indigo-500 mb-4"></i>
+                        <h3 class="font-semibold">High-Speed Wi-Fi</h3>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow">
+                        <i class="fas fa-snowflake text-4xl text-indigo-500 mb-4"></i>
+                        <h3 class="font-semibold">Air Conditioned Rooms</h3>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow">
+                        <i class="fas fa-shield-halved text-4xl text-indigo-500 mb-4"></i>
+                        <h3 class="font-semibold">24/7 Security</h3>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow">
+                        <i class="fas fa-utensils text-4xl text-indigo-500 mb-4"></i>
+                        <h3 class="font-semibold">Hygienic Food</h3>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow">
+                        <i class="fas fa-pump-soap text-4xl text-indigo-500 mb-4"></i>
+                        <h3 class="font-semibold">Laundry Service</h3>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow">
+                        <i class="fas fa-broom text-4xl text-indigo-500 mb-4"></i>
+                        <h3 class="font-semibold">Daily Housekeeping</h3>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow">
+                        <i class="fas fa-bolt text-4xl text-indigo-500 mb-4"></i>
+                        <h3 class="font-semibold">Power Backup</h3>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow">
+                        <i class="fas fa-car text-4xl text-indigo-500 mb-4"></i>
+                        <h3 class="font-semibold">Parking Space</h3>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-      function typewriterEffect(element, text) {
-        if (isTyping) {
-          clearInterval(typingInterval);
-        }
-        isTyping = true;
-        element.innerHTML = '';
-        cursor.style.display = 'inline';
-        
-        let i = 0;
-        typingInterval = setInterval(() => {
-          if (i < text.length) {
-            element.innerHTML += text.charAt(i);
-            i++;
-          } else {
-            clearInterval(typingInterval);
-            isTyping = false;
-            cursor.style.display = 'none';
-          }
-        }, 20); // Typing speed
-      }
+        <!-- Gallery Section -->
+        <section id="gallery" class="py-20 bg-gray-100">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800">Our Gallery</h2>
+                    <p class="text-gray-600 mt-4 max-w-2xl mx-auto">A glimpse into the life at Narayan PG and Hostel.</p>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="grid gap-4">
+                        <div><img class="h-auto max-w-full rounded-lg gallery-img" src="https://placehold.co/500x800/a0aec0/ffffff?text=View+1" alt=""></div>
+                        <div><img class="h-auto max-w-full rounded-lg gallery-img" src="https://placehold.co/500x500/a0aec0/ffffff?text=View+2" alt=""></div>
+                    </div>
+                    <div class="grid gap-4">
+                        <div><img class="h-auto max-w-full rounded-lg gallery-img" src="https://placehold.co/500x500/a0aec0/ffffff?text=View+3" alt=""></div>
+                        <div><img class="h-auto max-w-full rounded-lg gallery-img" src="https://placehold.co/500x800/a0aec0/ffffff?text=View+4" alt=""></div>
+                    </div>
+                    <div class="grid gap-4">
+                        <div><img class="h-auto max-w-full rounded-lg gallery-img" src="https://placehold.co/500x800/a0aec0/ffffff?text=View+5" alt=""></div>
+                        <div><img class="h-auto max-w-full rounded-lg gallery-img" src="https://placehold.co/500x500/a0aec0/ffffff?text=View+6" alt=""></div>
+                    </div>
+                     <div class="grid gap-4">
+                        <div><img class="h-auto max-w-full rounded-lg gallery-img" src="https://placehold.co/500x500/a0aec0/ffffff?text=View+7" alt=""></div>
+                        <div><img class="h-auto max-w-full rounded-lg gallery-img" src="https://placehold.co/500x800/a0aec0/ffffff?text=View+8" alt=""></div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-      generateBtn.addEventListener('click', () => {
-        if (isTyping) return; // Prevent new generation while typing
+        <!-- Contact Section -->
+        <section id="contact" class="py-20">
+            <div class="container mx-auto px-6">
+                 <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800">Contact Us</h2>
+                    <p class="text-gray-600 mt-4 max-w-2xl mx-auto">Have questions or want to book a visit? Get in touch with us!</p>
+                </div>
+                <div class="flex flex-col lg:flex-row gap-10">
+                    <!-- Contact Form -->
+                    <div class="lg:w-1/2 bg-white p-8 rounded-lg shadow-lg">
+                        <h3 class="text-2xl font-semibold mb-6">Send us a Message</h3>
+                        <form action="#" method="POST">
+                            <div class="mb-4">
+                                <label for="name" class="block text-gray-700 mb-2">Name</label>
+                                <input type="text" id="name" name="name" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" required>
+                            </div>
+                            <div class="mb-4">
+                                <label for="email" class="block text-gray-700 mb-2">Email</label>
+                                <input type="email" id="email" name="email" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" required>
+                            </div>
+                            <div class="mb-4">
+                                <label for="message" class="block text-gray-700 mb-2">Message</label>
+                                <textarea id="message" name="message" rows="5" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" required></textarea>
+                            </div>
+                            <button type="submit" class="w-full bg-indigo-600 text-white py-3 rounded-lg font-semibold hover:bg-indigo-700 transition">Send Message</button>
+                        </form>
+                    </div>
+                    <!-- Contact Info & Map -->
+                    <div class="lg:w-1/2">
+                         <div class="bg-white p-8 rounded-lg shadow-lg mb-6">
+                            <h3 class="text-2xl font-semibold mb-4">Contact Information</h3>
+                            <p class="text-gray-600 mb-4 flex items-center"><i class="fas fa-map-marker-alt mr-3 text-indigo-500"></i> 123 University Road, Near Kalawad Road, Rajkot, Gujarat 360005</p>
+                            <p class="text-gray-600 mb-4 flex items-center"><i class="fas fa-phone mr-3 text-indigo-500"></i> +91 98765 43210</p>
+                            <p class="text-gray-600 flex items-center"><i class="fas fa-envelope mr-3 text-indigo-500"></i> contact@narayanpg.com</p>
+                        </div>
+                        <div class="rounded-lg shadow-lg overflow-hidden">
+                           <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d118147.68724177433!2d70.736792!3d22.273471999999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3959c98ac7140001%3A0x316442133200cfc9!2sRajkot%2C%20Gujarat!5e0!3m2!1sen!2sin!4v1709214717831!5m2!1sen!2sin" width="100%" height="350" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
 
-        const prompt = promptInput.value.toLowerCase();
-        let response = aiResponses.default;
-        
-        for (const key in aiResponses) {
-            if (prompt.includes(key)) {
-                response = aiResponses[key];
-                break;
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-10">
+        <div class="container mx-auto px-6 text-center">
+            <p class="text-lg font-semibold">Narayan PG & Hostel</p>
+            <p class="text-gray-400 mt-2">Providing quality living since 2020.</p>
+            <div class="flex justify-center space-x-6 mt-4">
+                <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-whatsapp"></i></a>
+            </div>
+            <p class="text-gray-500 text-sm mt-8">&copy; 2024 Narayan PG & Hostel. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when a link is clicked
+        const mobileMenuLinks = document.querySelectorAll('#mobile-menu a');
+        mobileMenuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Add shadow to header on scroll
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('shadow-xl');
+            } else {
+                header.classList.remove('shadow-xl');
             }
-        }
-        
-        // Combine explanation and code for the typewriter
-        const fullResponseText = `${response.explanation}\n\n${response.code}`;
-        typewriterEffect(codeOutput, fullResponseText);
-        
-        // Update preview pane
-        if (response.preview) {
-          livePreview.innerHTML = response.preview;
-        } else {
-          livePreview.innerHTML = '<span class="preview-placeholder">No visual preview for this language.</span>';
-        }
-      });
-    });
-  </script>
+        });
+    </script>
 </body>
 </html>
